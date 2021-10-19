@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "303120779911",
+    "project_id": "pickyourlead-95373",
+    "storage_bucket": "pickyourlead-95373.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303120779911:android:1124a9a498b87008fe8622",
+        "android_client_info": {
+          "package_name": "com.example.pickyourlead"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303120779911-shiat5d23bfmuis3apu0bjvu48g59s28.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBUUM2NContznkcGOp2Jzmo-trNCaVW8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303120779911-shiat5d23bfmuis3apu0bjvu48g59s28.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
