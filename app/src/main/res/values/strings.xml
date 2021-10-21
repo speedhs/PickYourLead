@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PickYourLead</string>
+    
+    <string-array name="branches">
+        <item>CSE</item>
+        <item>ECE</item>
+        <item>Mechanical</item>
+    </string-array>
+
 </resources>
