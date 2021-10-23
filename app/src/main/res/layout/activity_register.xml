@@ -24,6 +24,7 @@
         app:layout_constraintVertical_bias="0.17000002" />
 
     <EditText
+        android:layout_width="wrap_content"
         android:id="@+id/editTextTextPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -139,10 +140,17 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2"
         app:layout_constraintVertical_bias="0.64" />
 
+<<<<<<< Updated upstream
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="247dp"
         android:layout_height="48dp"
+=======
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+>>>>>>> Stashed changes
         android:layout_marginStart="1dp"
         android:layout_marginTop="19dp"
         android:layout_marginEnd="1dp"
@@ -150,7 +158,11 @@
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+<<<<<<< Updated upstream
         app:layout_constraintTop_toBottomOf="@+id/textView10"
         tools:ignore="SpeakableTextPresentCheck" />
+=======
+        app:layout_constraintTop_toBottomOf="@+id/textView10"/>
+>>>>>>> Stashed changes
 
 </androidx.constraintlayout.widget.ConstraintLayout>
