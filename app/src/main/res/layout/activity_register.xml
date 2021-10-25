@@ -24,7 +24,6 @@
         app:layout_constraintVertical_bias="0.17000002" />
 
     <EditText
-        android:layout_width="wrap_content"
         android:id="@+id/editTextTextPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,6 +37,7 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -135,22 +135,14 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/spinner2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.73"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2"
-        app:layout_constraintVertical_bias="0.64" />
+        app:layout_constraintVertical_bias="0.0" /><![CDATA[
 
-<<<<<<< Updated upstream
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="247dp"
-        android:layout_height="48dp"
-=======
-    <com.google.android.material.textfield.TextInputLayout
 
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
->>>>>>> Stashed changes
+
+    >>>>>> Stashed changes
         android:layout_marginStart="1dp"
         android:layout_marginTop="19dp"
         android:layout_marginEnd="1dp"
@@ -158,11 +150,24 @@
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-<<<<<<< Updated upstream
+
+
+    ]]>
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="247dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginBottom="37dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.79"
         tools:ignore="SpeakableTextPresentCheck" />
-=======
-        app:layout_constraintTop_toBottomOf="@+id/textView10"/>
->>>>>>> Stashed changes
 
 </androidx.constraintlayout.widget.ConstraintLayout>
