@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">PickYourLead</string>
-    
+
     <string-array name="branches">
         <item>CSE</item>
         <item>ECE</item>
         <item>Mechanical</item>
+    </string-array>
+
+    <string-array name="batch">
+        <item>2021</item>
+        <item>2022</item>
+        <item>2023</item>
+        <item>2024</item>
     </string-array>
 
 </resources>
