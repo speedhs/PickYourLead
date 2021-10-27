@@ -14,7 +14,7 @@
         android:layout_marginStart="155dp"
         android:layout_marginEnd="162dp"
         android:fontFamily="sans-serif-medium"
-        android:onClick="print"
+        android:onClick="options_page"
         android:text="Sign in"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
