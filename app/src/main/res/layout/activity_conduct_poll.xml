@@ -11,6 +11,7 @@
         android:layout_width="266dp"
         android:layout_height="82dp"
 
+        android:onClick="activePoll"
         android:text="Active Polls"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/button5"

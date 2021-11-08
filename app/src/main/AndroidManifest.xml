@@ -10,19 +10,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PickYourLead">
         <activity
-            android:name=".Portfolio"
+            android:name=".Results"
             android:exported="true" />
 
 
 
         <activity
-            android:name=".ConductPoll"
+            android:name=".Vote"
             android:exported="true"/>
 
 
 
+
+
+        <activity
+            android:name=".Portfolio"
+            android:exported="true" />
+        <activity
+            android:name=".ConductPoll"
+            android:exported="true" />
         <activity
             android:name=".Register"
+            android:exported="true" />
+
+        <activity
+            android:name=".Home"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,17 +42,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".Home"
-            android:exported="true" />
-
-
-
         <activity
             android:name=".Login"
             android:exported="true" />
-
 
         <meta-data
             android:name="preloaded_fonts"
