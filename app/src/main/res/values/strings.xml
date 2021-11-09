@@ -2,9 +2,12 @@
     <string name="app_name">PickYourLead</string>
 
     <string-array name="branches">
+        <item>Select your Branch</item>
         <item>CSE</item>
         <item>ECE</item>
         <item>Mechanical</item>
+        <item>Civil</item>
+        <item>Biotech</item>
     </string-array>
 
     <string-array name="batch">

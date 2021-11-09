@@ -9,9 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 //firebase
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -71,20 +73,20 @@ public class Register extends AppCompatActivity {
             }/
         }
     });*/
-             //storefire(email);
+             storefire(email);
 
 
 
          }
 
-//    public void storefire(String email)
-//    {
-//        Map<String, Object> user = new HashMap<>();
-//        user.put("email", email);
-//        user.put("branch",branch);
-//        db = FirebaseFirestore.getInstance();
-//        db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
-//    }
+    public void storefire(String email)
+    {
+        Map<String, Object> user = new HashMap<>();
+        user.put("email", email);
+        user.put("branch",branch);
+        db = FirebaseFirestore.getInstance();
+        db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
+    }
 
 
     @Override
@@ -100,6 +102,19 @@ public class Register extends AppCompatActivity {
         mySpinner.setAdapter(myAdapter);
 
 
-        branch = mySpinner.getSelectedItem().toString();
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
+                branch = mySpinner.getSelectedItem().toString();
+                //Toast.makeText(getApplicationContext(), branch , Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+
     }
 }
