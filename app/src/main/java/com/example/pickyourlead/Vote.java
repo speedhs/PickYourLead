@@ -27,7 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Vote extends AppCompatActivity {
 
-   
+
     Button button_one;
     FirebaseFirestore db;
     @Override
