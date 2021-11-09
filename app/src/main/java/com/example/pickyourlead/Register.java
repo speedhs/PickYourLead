@@ -21,12 +21,17 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Register extends AppCompatActivity {
     FirebaseFirestore db;
+    String branch;
 
     public void options_page(View view) {//moving to next screen
         System.out.println("suc");
         re();
+        //storefire();
         Intent next = new Intent(this, ConductPoll.class);
         startActivity(next);
     }
@@ -47,7 +52,8 @@ public class Register extends AppCompatActivity {
              pass=findViewById(R.id.editTextTextPassword2);
              String password=pass.getText().toString();
              String email=mail.getText().toString();
-             mAuth.createUserWithEmailAndPassword(email, password);/*.addOnCompleteListener(this, new OnCompleteListener<AuthResult>() /*{
+             mAuth.createUserWithEmailAndPassword(email, password);
+             System.out.println("hey");/*.addOnCompleteListener(this, new OnCompleteListener<AuthResult>() /*{
         @Override
         public void onComplete(@NonNull Task<AuthResult> task) //{
             /*if (task.isSuccessful()) {
@@ -65,9 +71,20 @@ public class Register extends AppCompatActivity {
             }/
         }
     });*/
+             //storefire(email);
+
+
+
          }
 
-
+//    public void storefire(String email)
+//    {
+//        Map<String, Object> user = new HashMap<>();
+//        user.put("email", email);
+//        user.put("branch",branch);
+//        db = FirebaseFirestore.getInstance();
+//        db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
+//    }
 
 
     @Override
@@ -81,10 +98,8 @@ public class Register extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.branches));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
+
+
+        branch = mySpinner.getSelectedItem().toString();
     }
-    public void storefire()
-    {
-        db = FirebaseFirestore.getInstance();
-        db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).update("name", "harsh");
-    }
-    }
+}
