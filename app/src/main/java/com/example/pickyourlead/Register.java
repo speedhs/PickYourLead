@@ -18,9 +18,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Register extends AppCompatActivity {
-
+    FirebaseFirestore db;
 
     public void options_page(View view) {//moving to next screen
         System.out.println("suc");
@@ -80,4 +82,9 @@ public class Register extends AppCompatActivity {
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
     }
-}
+    public void storefire()
+    {
+        db = FirebaseFirestore.getInstance();
+        db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).update("name", "harsh");
+    }
+    }
