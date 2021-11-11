@@ -30,6 +30,10 @@ public class Vote extends AppCompatActivity {
 
     Button button_one;
     FirebaseFirestore db;
+    Long flagStatus;
+    String uId=FirebaseAuth.getInstance().getCurrentUser().getUid();
+    String option;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,26 +45,46 @@ public class Vote extends AppCompatActivity {
         Intent next = new Intent(this, Results.class);
         startActivity(next);
     }
+
     public void onClickVirat(View view){
 
     button_one=findViewById(R.id.button6);
-    String option=button_one.getText().toString();
-        db.collection("trial").document("players").update("VIRAT", FieldValue.increment(1));
-        Toast.makeText(Vote.this, option+"->... clicked", Toast.LENGTH_SHORT).show();
+    option=button_one.getText().toString();
+
     }
 
     public void onClickRohit(View view){
 
         button_one=findViewById(R.id.button7);
-        String option=button_one.getText().toString();
+        option=button_one.getText().toString();
+    }
 
-        db.collection("trial").document("players").update("ROHIT", FieldValue.increment(1));
-        Toast.makeText(Vote.this, option +"->... clicked", Toast.LENGTH_SHORT).show();
+    public void vote(){
+
+        db.collection("users").document(uId).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            flagStatus=documentSnapshot.getLong("flag");
+                            System.out.println("FLAG STATUS ---->"+flagStatus);
+                            if(flagStatus==0){
+                                db.collection("trial").document("players").update(option, FieldValue.increment(1));
+                                db.collection("users").document(uId).update("flag", FieldValue.increment(1));
+                                Toast.makeText(Vote.this, option+"->... clicked", Toast.LENGTH_SHORT).show();
+                            }
+
+                            else{
+                                Toast.makeText(Vote.this, "Sorry,you have already voted", Toast.LENGTH_SHORT).show();
+                            }
+
+//
+
+                        } else {
+                            Toast.makeText(Vote.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }
 
-//    Map<String,Object> note = new HashMap<>();
-//    note.put("Dhoni"," M.S. ");
-//    db.collection("trial 2").document("players 2").set(note);
-//DocumentReference washingtonRef = db.collection("cities").document("DC");
-//.update("VIRAT", FieldValue.increment(1))

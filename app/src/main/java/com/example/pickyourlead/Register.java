@@ -38,9 +38,9 @@ public class Register extends AppCompatActivity {
         startActivity(next);
     }
 
-         public void re() {
-             FirebaseAuth mAuth = FirebaseAuth.getInstance();
-             // Initialize Firebase Auth
+    public void re() {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        // Initialize Firebase Auth
 //             void onStart(){
 //                 super.onStart();
 //                 // Check if user is signed in (non-null) and update UI accordingly.
@@ -49,13 +49,13 @@ public class Register extends AppCompatActivity {
 //                     currentUser.reload();
 //                 }
 //             }
-             EditText mail,pass;
-             mail=findViewById(R.id.editTextTextEmailAddress2);
-             pass=findViewById(R.id.editTextTextPassword2);
-             String password=pass.getText().toString();
-             String email=mail.getText().toString();
-             mAuth.createUserWithEmailAndPassword(email, password);
-             System.out.println("hey");/*.addOnCompleteListener(this, new OnCompleteListener<AuthResult>() /*{
+        EditText mail,pass;
+        mail=findViewById(R.id.editTextTextEmailAddress2);
+        pass=findViewById(R.id.editTextTextPassword2);
+        String password=pass.getText().toString();
+        String email=mail.getText().toString();
+        mAuth.createUserWithEmailAndPassword(email, password);
+        System.out.println("hey");/*.addOnCompleteListener(this, new OnCompleteListener<AuthResult>() /*{
         @Override
         public void onComplete(@NonNull Task<AuthResult> task) //{
             /*if (task.isSuccessful()) {
@@ -73,11 +73,11 @@ public class Register extends AppCompatActivity {
             }/
         }
     });*/
-             storefire(email);
+        storefire(email);
 
 
 
-         }
+    }
 
     public void storefire(String email)
     {
