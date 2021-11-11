@@ -22,11 +22,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-
-
-
 public class Vote extends AppCompatActivity {
-
 
     Button button_one;
     FirebaseFirestore db;
@@ -50,6 +46,7 @@ public class Vote extends AppCompatActivity {
 
     button_one=findViewById(R.id.button6);
     option=button_one.getText().toString();
+    vote();
 
     }
 
@@ -57,6 +54,7 @@ public class Vote extends AppCompatActivity {
 
         button_one=findViewById(R.id.button7);
         option=button_one.getText().toString();
+        vote();
     }
 
     public void vote(){
@@ -77,7 +75,6 @@ public class Vote extends AppCompatActivity {
                             else{
                                 Toast.makeText(Vote.this, "Sorry,you have already voted", Toast.LENGTH_SHORT).show();
                             }
-
 //
 
                         } else {

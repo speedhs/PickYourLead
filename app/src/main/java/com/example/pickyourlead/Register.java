@@ -75,8 +75,6 @@ public class Register extends AppCompatActivity {
     });*/
         storefire(email);
 
-
-
     }
 
     public void storefire(String email)
@@ -84,6 +82,7 @@ public class Register extends AppCompatActivity {
         Map<String, Object> user = new HashMap<>();
         user.put("email", email);
         user.put("branch",branch);
+        user.put("flag",0);
         db = FirebaseFirestore.getInstance();
         db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
     }
