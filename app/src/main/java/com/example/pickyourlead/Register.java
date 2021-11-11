@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class Register extends AppCompatActivity {
     FirebaseFirestore db;
-    String branch;
+    static String branch;
 
     public void options_page(View view) {//moving to next screen
         System.out.println("suc");
@@ -100,7 +100,6 @@ public class Register extends AppCompatActivity {
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
 
-
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
@@ -113,7 +112,5 @@ public class Register extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
-
-
     }
 }
