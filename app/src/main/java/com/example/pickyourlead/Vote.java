@@ -33,7 +33,6 @@ public class Vote extends AppCompatActivity {
 
     String option;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,4 +126,3 @@ public class Vote extends AppCompatActivity {
                 });
     }
 }
-
