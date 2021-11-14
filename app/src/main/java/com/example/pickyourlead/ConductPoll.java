@@ -15,7 +15,7 @@ public class ConductPoll extends AppCompatActivity {
     }
 
     public void activePoll(View view){
-        Intent next = new Intent(this, Vote.class);
+        Intent next = new Intent(this, PollsList.class);
         startActivity(next);
     }
 }

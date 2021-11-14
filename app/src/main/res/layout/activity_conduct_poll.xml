@@ -10,7 +10,6 @@
         android:id="@+id/button3"
         android:layout_width="266dp"
         android:layout_height="82dp"
-
         android:onClick="activePoll"
         android:text="Active Polls"
         android:textSize="24sp"
@@ -24,7 +23,6 @@
         android:id="@+id/button5"
         android:layout_width="270dp"
         android:layout_height="84dp"
-
         android:layout_marginTop="356dp"
         android:text="VIEW PAST RESULTS"
         android:textSize="24sp"

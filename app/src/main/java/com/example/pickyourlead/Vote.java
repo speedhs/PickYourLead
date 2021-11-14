@@ -36,24 +36,22 @@ public class Vote extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+<<<<<<< Updated upstream
 
         //System.out.println("+++++++++++++++++++++++=========================================" + "BRANCH: ");
        // System.out.println(Register.branch);
+=======
+>>>>>>> Stashed changes
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_vote);
         uId=FirebaseAuth.getInstance().getCurrentUser().getUid();
         db = FirebaseFirestore.getInstance();
-        //button_one=findViewById(R.id.button9);
-
-        //button_one.setText(db.collection("users").document(uId).get);
 
         b_one=findViewById(R.id.button6);
         b_two=findViewById(R.id.button7);
         b_three=findViewById(R.id.button9);
-
         vote2();
-
     }
 
     public  void nextPage(View view) {
@@ -134,7 +132,6 @@ public class Vote extends AppCompatActivity {
                         }
                     }
                 });
-
     }
 }
 
