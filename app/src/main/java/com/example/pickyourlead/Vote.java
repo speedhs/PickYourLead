@@ -29,16 +29,20 @@ public class Vote extends AppCompatActivity {
     FirebaseFirestore db;
     Long flagStatus;
     String cad0, cad1, cad2;
-    String uId=FirebaseAuth.getInstance().getCurrentUser().getUid();
+    String uId;
+
     String option;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("+++++++++++++++++++++++=========================================" + "BRANCH: ");
-        System.out.println(Register.branch);
+
+        //System.out.println("+++++++++++++++++++++++=========================================" + "BRANCH: ");
+       // System.out.println(Register.branch);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_vote);
+        uId=FirebaseAuth.getInstance().getCurrentUser().getUid();
         db = FirebaseFirestore.getInstance();
         //button_one=findViewById(R.id.button9);
 
@@ -71,7 +75,7 @@ public class Vote extends AppCompatActivity {
         vote();
     }
 
-    public void onClickCR(View view) {
+    public void onClickYuzi(View view) {
 
         button_one=findViewById(R.id.button9);
         //button_one.setText(db.collection("users").document(uId));
@@ -100,7 +104,8 @@ public class Vote extends AppCompatActivity {
 //
 
                         } else {
-                            Toast.makeText(Vote.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                            vote();
+                            //Toast.makeText(Vote.this, "Document... does not exist", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

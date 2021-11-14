@@ -22,14 +22,16 @@
         <entry key="app/src/main/res/layout/activity_conduct_poll.xml" value="0.13647830474268416" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/layout/activity_polls_list.xml" value="0.13647830474268416" />
         <entry key="app/src/main/res/layout/activity_portfolio.xml" value="0.12815338042381433" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.13647830474268416" />
         <entry key="app/src/main/res/layout/activity_results.xml" value="0.17074275362318841" />
         <entry key="app/src/main/res/layout/activity_vote.xml" value="0.17074275362318841" />
         <entry key="app/src/main/res/layout/analysis.xml" value="0.1890625" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
