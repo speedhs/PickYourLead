@@ -11,7 +11,7 @@
         android:theme="@style/Theme.PickYourLead">
         <activity
             android:name=".PollsList"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Results"
             android:exported="true" />
@@ -39,10 +39,8 @@
         <activity
             android:name=".Login"
             android:exported="true" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 </manifest>

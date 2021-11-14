@@ -14,7 +14,8 @@ public class ConductPoll extends AppCompatActivity {
         setContentView(R.layout.activity_conduct_poll);
     }
 
-    public void activePoll(View view){
+    public void activePoll(View view) {
+        System.out.println("blah blah");
         Intent next = new Intent(this, PollsList.class);
         startActivity(next);
     }

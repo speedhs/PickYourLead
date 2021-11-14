@@ -36,14 +36,7 @@ public class Vote extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<<<<<<< Updated upstream
-
-        //System.out.println("+++++++++++++++++++++++=========================================" + "BRANCH: ");
-       // System.out.println(Register.branch);
-=======
->>>>>>> Stashed changes
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_vote);
         uId=FirebaseAuth.getInstance().getCurrentUser().getUid();
         db = FirebaseFirestore.getInstance();

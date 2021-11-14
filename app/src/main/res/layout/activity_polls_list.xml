@@ -29,15 +29,14 @@
         android:layout_marginEnd="323dp"
         android:layout_marginBottom="38dp"
         android:fontFamily="@font/almendra"
-        android:text="TextView"
+        android:text="Council Elections: "
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.53"
-        tools:text="Council Elections: " />
+        app:layout_constraintVertical_bias="0.53" />
 
     <Button
         android:id="@+id/button10"

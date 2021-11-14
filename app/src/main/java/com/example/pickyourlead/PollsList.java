@@ -15,7 +15,7 @@ public class PollsList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_polls_list);
 
-        Spinner mySpinner = (Spinner) findViewById(R.id.spinner2);
+        Spinner mySpinner = (Spinner) findViewById(R.id.spinner);
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(PollsList.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.council_elections));
