@@ -1,80 +1,107 @@
-package com.learntodroid.piechartandroid;
+package com.example.pickyourlead;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
 
-import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
+//firebase
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
-    private PieChart pieChart;
+public class Register extends AppCompatActivity {
+    FirebaseFirestore db;
+    static String branch;
+
+    public void options_page(View view) {//moving to next screen
+        System.out.println("suc");
+        re();
+        //storefire();
+        Intent next = new Intent(this, Options.class);
+        startActivity(next);
+    }
+
+    public void re() {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        // Initialize Firebase Auth
+//             void onStart(){
+//                 super.onStart();
+//                 // Check if user is signed in (non-null) and update UI accordingly.
+//                 FirebaseUser currentUser = mAuth.getCurrentUser();
+//                 if (currentUser != null) {
+//                     currentUser.reload();
+//                 }
+//             }
+        EditText mail,pass;
+        mail=findViewById(R.id.editTextTextEmailAddress2);
+        pass=findViewById(R.id.editTextTextPassword2);
+        String password=pass.getText().toString();
+        String email=mail.getText().toString();
+        mAuth.createUserWithEmailAndPassword(email, password);
+        System.out.println("hey");/*.addOnCompleteListener(this, new OnCompleteListener<AuthResult>() /*{
+        @Override
+        public void onComplete(@NonNull Task<AuthResult> task) //{
+            /*if (task.isSuccessful()) {
+            // Sign in success, update UI with the signed-in user's information
+                Log.d(TAG, "createUserWithEmail:success");
+                FirebaseUser user = mAuth.getCurrentUser();
+                updateUI(user);
+            /*}
+            else {
+                // If sign in fails, display a message to the user.
+                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show();
+                updateUI(null);
+            }/
+        }
+    });*/
+        storefire(email);
+
+    }
+
+    public void storefire(String email)
+    {
+        Map<String, Object> user = new HashMap<>();
+        user.put("email", email);
+        user.put("branch",branch);
+        user.put("flag",0);
+        db = FirebaseFirestore.getInstance();
+        db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
 
-        pieChart = findViewById(R.id.activity_main_piechart);
-        setupPieChart();
-        loadPieChartData();
-    }
+        Spinner mySpinner = (Spinner) findViewById(R.id.spinner2);
 
-    private void setupPieChart() {
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setUsePercentValues(true);
-        pieChart.setEntryLabelTextSize(12);
-        pieChart.setEntryLabelColor(Color.BLACK);
-        pieChart.setCenterText("Spending by Category");
-        pieChart.setCenterTextSize(24);
-        pieChart.getDescription().setEnabled(false);
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Register.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.branches));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner.setAdapter(myAdapter);
 
-        Legend l = pieChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(false);
-        l.setEnabled(true);
-    }
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
+                branch = mySpinner.getSelectedItem().toString();
+                //Toast.makeText(getApplicationContext(), branch , Toast.LENGTH_SHORT).show();
+            }
 
-    private void loadPieChartData() {
-        ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(0.2f, "Food & Dining"));
-        entries.add(new PieEntry(0.15f, "Medical"));
-        entries.add(new PieEntry(0.10f, "Entertainment"));
-        entries.add(new PieEntry(0.25f, "Electricity and Gas"));
-        entries.add(new PieEntry(0.3f, "Housing"));
-
-        ArrayList<Integer> colors = new ArrayList<>();
-        for (int color: ColorTemplate.MATERIAL_COLORS) {
-            colors.add(color);
-        }
-
-        for (int color: ColorTemplate.VORDIPLOM_COLORS) {
-            colors.add(color);
-        }
-
-        PieDataSet dataSet = new PieDataSet(entries, "Expense Category");
-        dataSet.setColors(colors);
-
-        PieData data = new PieData(dataSet);
-        data.setDrawValues(true);
-        data.setValueFormatter(new PercentFormatter(pieChart));
-        data.setValueTextSize(12f);
-        data.setValueTextColor(Color.BLACK);
-
-        pieChart.setData(data);
-        pieChart.invalidate();
-
-        pieChart.animateY(1400, Easing.EaseInOutQuad);
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
     }
 }
