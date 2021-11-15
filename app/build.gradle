@@ -42,7 +42,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     // For Card view
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 
 // Chart and graph library
     implementation 'com.github.blackfizz:eazegraph:1.2.5l@aar'
