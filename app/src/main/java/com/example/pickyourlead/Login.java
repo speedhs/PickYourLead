@@ -13,7 +13,7 @@ public class Login extends AppCompatActivity {
     public void options_page(View view) {//moving to next screen
         System.out.println("suc");
         login();
-        Intent next = new Intent(this, ConductPoll.class);
+        Intent next = new Intent(this, Options.class);
         startActivity(next);
     }
 

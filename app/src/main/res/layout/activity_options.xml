@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConductPoll">
+    tools:context=".Options">
 
     <Button
         android:id="@+id/button3"
@@ -24,6 +24,7 @@
         android:layout_width="270dp"
         android:layout_height="84dp"
         android:layout_marginTop="356dp"
+        android:onClick="viewResults"
         android:text="VIEW PAST RESULTS"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

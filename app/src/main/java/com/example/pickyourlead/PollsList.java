@@ -28,14 +28,15 @@ public class PollsList extends AppCompatActivity {
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
                 String item = mySpinner.getSelectedItem().toString();
                 //Toast.makeText(getApplicationContext(), branch , Toast.LENGTH_SHORT).show();
-                if (arg0.getItemAtPosition(arg2).equals("Sports Head")) {
+                if(Home.nextpage.equals("Vote")){
                     Intent intent = new Intent(PollsList.this, Vote.class);
                     startActivity(intent);
                 }
-                else if (arg0.getItemAtPosition(arg2).equals("Academic Head")) {
-                    Intent intent = new Intent(PollsList.this, Vote.class);
+                else{
+                    Intent intent = new Intent(PollsList.this, Results.class);
                     startActivity(intent);
                 }
+
             }
 
             @Override
