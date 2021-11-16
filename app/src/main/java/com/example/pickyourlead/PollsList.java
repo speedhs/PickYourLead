@@ -28,14 +28,7 @@ public class PollsList extends AppCompatActivity {
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
                 String item = mySpinner.getSelectedItem().toString();
                 //Toast.makeText(getApplicationContext(), branch , Toast.LENGTH_SHORT).show();
-                if(Home.nextpage.equals("Vote")){
-                    Intent intent = new Intent(PollsList.this, Vote.class);
-                    startActivity(intent);
-                }
-                else{
-                    Intent intent = new Intent(PollsList.this, Results.class);
-                    startActivity(intent);
-                }
+
 
             }
 
@@ -46,9 +39,15 @@ public class PollsList extends AppCompatActivity {
         });
     }
 
-    public void vote_page(View view) {
-        Intent next = new Intent(this, Vote.class);
-        startActivity(next);
+    public void navigate(View view){
+        if(Home.nextpage.equals("Vote")){
+            Intent intent = new Intent(PollsList.this, Vote.class);
+            startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(PollsList.this, Results.class);
+            startActivity(intent);
+        }
     }
 
 
