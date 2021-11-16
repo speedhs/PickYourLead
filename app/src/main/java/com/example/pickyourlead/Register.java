@@ -28,6 +28,7 @@ public class Register extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     static String branch;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    static int batch;
 
 
     public void options_page(View view) {//moving to next screen
@@ -80,6 +81,7 @@ public class Register extends AppCompatActivity {
         Map<String, Object> user = new HashMap<>();
         user.put("email", email);
         user.put("branch",branch);
+        user.put("batch", batch);
         user.put("flag",0);
         db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
         Intent next = new Intent(this, Options.class);
@@ -93,11 +95,18 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         Spinner mySpinner = (Spinner) findViewById(R.id.spinner2);
+        Spinner mySpinner2 = (Spinner) findViewById(R.id.spinner5);
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Register.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.branches));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
+
+        ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(Register.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.batch));
+        myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner2.setAdapter(myAdapter2);
+
 
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -111,5 +120,20 @@ public class Register extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
+
+        mySpinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
+                batch = Integer.parseInt(mySpinner2.getSelectedItem().toString());
+                //Toast.makeText(getApplicationContext(), branch , Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
     }
+
+
 }

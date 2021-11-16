@@ -1,19 +1,27 @@
 <resources>
     <string name="app_name">PickYourLead</string>
-
     <string-array name="branches">
         <item>Select your Branch</item>
         <item>CSE</item>
         <item>ECE</item>
         <item>Mechanical</item>
         <item>Civil</item>
-        <item>Biotech</item>
+        <item>BBA</item>
+        <item>MBA</item>
+        <item>BMS</item>
+
     </string-array>
 
     <string-array name="council_elections">
+        <item>Class Representative</item>
+        <item>President</item>
+        <item>Vice President</item>
+        <item>Cultural Secretary</item>
         <item>Sports Head</item>
-        <item>Academic Head</item>
-        <item>CR</item>
+        <item>Secretary of Academic Affairs</item>
+        <item>Secretary of External Affairs</item>
+        <item>Secretary of Senate</item>
+        <item>Secretary of Campus Affairs</item>
     </string-array>
 
     <string-array name="batch">
