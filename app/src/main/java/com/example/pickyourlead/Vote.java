@@ -22,14 +22,16 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class Vote extends AppCompatActivity {
 
     Button button_one;
     Button b_one, b_two, b_three;
-    FirebaseFirestore db;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     Long flagStatus;
     String cad0, cad1, cad2;
-    String uId;
+
 
     String option;
 
@@ -37,8 +39,7 @@ public class Vote extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
-        uId=FirebaseAuth.getInstance().getCurrentUser().getUid();
-        db = FirebaseFirestore.getInstance();
+
 
         b_one=findViewById(R.id.button6);
         b_two=findViewById(R.id.button7);
@@ -68,14 +69,13 @@ public class Vote extends AppCompatActivity {
     public void onClickYuzi(View view) {
 
         button_one=findViewById(R.id.button9);
-        //button_one.setText(db.collection("users").document(uId));
         option=button_one.getText().toString();
         vote();
     }
 
     public void vote() {
 
-        db.collection("users").document(uId).get()
+        db.collection("users").document(Options.uId).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -84,7 +84,7 @@ public class Vote extends AppCompatActivity {
                             System.out.println("FLAG STATUS ---->"+flagStatus);
                             if(flagStatus==0){
                                 db.collection("trial").document(Register.branch).update(option, FieldValue.increment(1));
-                                db.collection("users").document(uId).update("flag", FieldValue.increment(1));
+                                db.collection("users").document(Options.uId).update("flag", FieldValue.increment(1));
                                 Toast.makeText(Vote.this, option+"->... clicked", Toast.LENGTH_SHORT).show();
                             }
 
@@ -93,9 +93,10 @@ public class Vote extends AppCompatActivity {
                             }
 //
 
-                        } else {
-                            vote();
-                            //Toast.makeText(Vote.this, "Document... does not exist", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                           // vote();
+                            Toast.makeText(Vote.this, "Please try again", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
