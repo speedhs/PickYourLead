@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -12,44 +13,105 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Results extends AppCompatActivity {
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
 
-    TextView textviewone;
-    TextView textviewtwo;
+public class Results extends AppCompatActivity {
+     PieChart chart;
+    FirebaseFirestore db=FirebaseFirestore.getInstance();
+    String cad0, cad1, cad2;
+     long i1;
+     long i2;
+     long i3;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
-//        textviewone=findViewById(R.id.textView9);
-//        textviewtwo=findViewById(R.id.textView13);
-//        db.collection("trial").document("players").get()
-//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                        if (documentSnapshot.exists()) {
-//                          Long vScore=documentSnapshot.getLong("VIRAT");
-//                            Long rScore=documentSnapshot.getLong("ROHIT");
-////                            String rScore = (String) documentSnapshot.get("ROHIT");
-//                            //Map<String, Object> note = documentSnapshot.getData();
+
+
+
+        chart= findViewById(R.id.piechart);
+
+        result();
+
+
+
+
+    }
+
+    public void result() {
+
+        db.collection("trial").document(Register.branch).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            TextView t1=findViewById(R.id.Cand0);
+                            TextView t2=findViewById(R.id.Cand1);
+                            TextView t3=findViewById(R.id.Cand2);
+                            TextView c1=findViewById(R.id.c1);
+                            TextView c2=findViewById(R.id.c2);
+                            TextView c3=findViewById(R.id.c3);
+
+                            TextView p1=findViewById(R.id.p1);
+                            TextView p2=findViewById(R.id.p2);
+                            TextView p3=findViewById(R.id.p3);
+                            cad0=documentSnapshot.getString("0");
+                            i1=documentSnapshot.getLong(cad0);
+
+                            cad1=documentSnapshot.getString("1");
+                            i2= documentSnapshot.getLong(cad1);
+
+                            cad2=documentSnapshot.getString("2");
+                            i3= documentSnapshot.getLong(cad2);
+
+
+                            chart.addPieSlice(new PieModel(cad0,i1, Color.parseColor("#FFA726")));
+                            chart.addPieSlice(new PieModel(cad1,i2, Color.parseColor("#66BB6A")));
+                            chart.addPieSlice(new PieModel(cad2,i3, Color.parseColor("#EF5350")));
+                            double sum=i1+i2+i3;
+                            t1.setText(cad0);
+                            t2.setText(cad1);
+                            t3.setText(cad2);
+
+                            c1.setText(cad0);
+                            c2.setText(cad1);
+                            c3.setText(cad2);
+
+                            double perc1=(i1/sum)*100;
+                            double perc2=(i2/sum)*100;
+                            double perc3=(i3/sum)*100;
+
+                            p1.setText( Double.toString(perc1)+"%");
+                            p2.setText( Double.toString(perc2)+"%");
+                            p3.setText( Double.toString(perc3)+"%");
+
+
+
+
+                            chart.startAnimation();
+
 //
-//                            textviewone.setText("Virat got "+vScore+" votes");
-//                            textviewtwo.setText("Rohit got "+rScore+" votes");
-//
-//                        } else {
-//                            Toast.makeText(Results.this, "Document does not exist", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Toast.makeText(Results.this, "Error!", Toast.LENGTH_SHORT).show();
-//                        Log.d(TAG, e.toString());
-//                    }
-//                });
+
+                        }
+                        else {
+                            chart.addPieSlice(new PieModel("Nothing",5, Color.parseColor("#FFA726")));
+                            chart.addPieSlice(new PieModel("Nothing",5, Color.parseColor("#66BB6A")));
+                            chart.addPieSlice(new PieModel("Nothing",5, Color.parseColor("#EF5350")));
+                            chart.startAnimation();
+                            //Toast.makeText(Vote.this, "Document... does not exist", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }

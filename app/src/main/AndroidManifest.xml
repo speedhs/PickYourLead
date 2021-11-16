@@ -9,15 +9,14 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.PickYourLead">
-        <activity
-            android:name=".PollLists2"
-            android:exported="false" />
+
         <activity
             android:name=".PollsList"
             android:exported="true" />
         <activity
             android:name=".Results"
             android:exported="true" />
+
         <activity
             android:name=".Vote"
             android:exported="true" />
@@ -27,9 +26,11 @@
         <activity
             android:name=".Options"
             android:exported="true" />
+
         <activity
             android:name=".Register"
             android:exported="true" />
+
         <activity
             android:name=".Home"
             android:exported="true">
@@ -39,6 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Login"
             android:exported="true" />

@@ -69,6 +69,7 @@
 
                     <!--Text view to display R -->
                     <TextView
+                        android:id="@+id/Cand0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
@@ -91,6 +92,7 @@
 
                     <!--Text view to display python text -->
                     <TextView
+                        android:id="@+id/Cand1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
@@ -113,6 +115,7 @@
 
                     <!--Text view to display C++ text -->
                     <TextView
+                        android:id="@+id/Cand2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
@@ -121,26 +124,6 @@
                 </LinearLayout>
 
                 <!--Linear layout to display Candidate -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="5dp">
-
-                    <!--View to display the blue color icon-->
-                    <View
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/Java" />
-
-                    <!--Text view to display Candidate 4 text -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:text="Candidate 4" />
-
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -204,6 +187,7 @@
                 <!-- percentage of votes for candidates -->
                 <!--  For now default set to 0-->
                 <TextView
+                    android:id="@+id/c1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
@@ -211,11 +195,13 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/tvR"
+                    android:id="@+id/p1"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_marginRight="0dp"
                     android:fontFamily="sans-serif-light"
+                    android:text="0"
                     android:textAlignment="textEnd"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textColor="@color/color_one"
@@ -240,18 +226,19 @@
                 android:layout_marginBottom="10dp">
 
                 <TextView
+                    android:id="@+id/c2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="Candidate 2"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <!--Text view to display the percentage -->
                 <!-- of votes to the candidates. -->
                 <!-- For now default set to 0-->
 
                 <TextView
-                    android:id="@+id/tvC3"
+                    android:id="@+id/p2"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -279,17 +266,18 @@
                 android:layout_marginBottom="10dp">
 
                 <TextView
+                    android:id="@+id/c3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="Candidate 3"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <!--Text view to display the percentage -->
                 <!-- of votes to the candidates. -->
                 <!-- For now default set to 0-->
                 <TextView
-                    android:id="@+id/tvC4"
+                    android:id="@+id/p3"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
