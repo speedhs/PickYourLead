@@ -41,9 +41,9 @@ public class Vote extends AppCompatActivity {
         setContentView(R.layout.activity_vote);
 
 
-        b_one=findViewById(R.id.button6);
-        b_two=findViewById(R.id.button7);
-        b_three=findViewById(R.id.button9);
+        b_two=findViewById(R.id.button6);
+        b_three=findViewById(R.id.button7);
+        b_one=findViewById(R.id.button9);
         vote2();
     }
 
@@ -83,7 +83,7 @@ public class Vote extends AppCompatActivity {
                             flagStatus=documentSnapshot.getLong("flag");
                             System.out.println("FLAG STATUS ---->"+flagStatus);
                             if(flagStatus==0){
-                                db.collection("trial").document(Register.branch).update(option, FieldValue.increment(1));
+                                db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).update(option, FieldValue.increment(1));
                                 db.collection("users").document(Options.uId).update("flag", FieldValue.increment(1));
                                 Toast.makeText(Vote.this, option+"->... clicked", Toast.LENGTH_SHORT).show();
                             }
@@ -104,7 +104,7 @@ public class Vote extends AppCompatActivity {
 
     public void vote2() {
 
-        db.collection("trial").document(Register.branch).get()
+        db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {

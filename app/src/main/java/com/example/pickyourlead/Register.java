@@ -28,7 +28,7 @@ public class Register extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     static String branch;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    static int batch;
+    static String batch;
 
 
     public void options_page(View view) {//moving to next screen
@@ -124,7 +124,7 @@ public class Register extends AppCompatActivity {
         mySpinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
-                batch = Integer.parseInt(mySpinner2.getSelectedItem().toString());
+                batch = mySpinner2.getSelectedItem().toString();
                 //Toast.makeText(getApplicationContext(), branch , Toast.LENGTH_SHORT).show();
             }
 

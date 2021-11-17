@@ -51,7 +51,7 @@ public class Results extends AppCompatActivity {
 
     public void result() {
 
-        db.collection("trial").document(Register.branch).get()
+        db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
