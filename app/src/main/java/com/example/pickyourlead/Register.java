@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -31,9 +32,12 @@ public class Register extends AppCompatActivity {
     static String originalBatch;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     static String batch;
+    private ProgressBar spinner;
+
 
 
     public void options_page(View view) {//moving to next screen
+        spinner.setVisibility(View.VISIBLE);
         System.out.println("suc");
         re();
 
@@ -97,6 +101,8 @@ public class Register extends AppCompatActivity {
 
 
         db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
+
+
         Intent next = new Intent(this, Options.class);
         startActivity(next);
     }
@@ -106,6 +112,8 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        spinner = (ProgressBar)findViewById(R.id.progressBar);
+        spinner.setVisibility(View.GONE);
 
         Spinner mySpinner = (Spinner) findViewById(R.id.spinner2);
         Spinner mySpinner2 = (Spinner) findViewById(R.id.spinner5);
@@ -139,6 +147,8 @@ public class Register extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
                 batch = mySpinner2.getSelectedItem().toString();
+
+
                 originalBatch=batch;
                 //Toast.makeText(getApplicationContext(), branch , Toast.LENGTH_SHORT).show();
             }

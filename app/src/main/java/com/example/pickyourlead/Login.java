@@ -8,6 +8,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,10 +21,12 @@ public class Login extends AppCompatActivity {
     private EditText email, pass;
     FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private ProgressBar spinner;
 
     public void options_page(View view) {//moving to next screen
         System.out.println("suc");
         //login();
+        spinner.setVisibility(View.VISIBLE);
         Intent next = new Intent(this, Options.class);
         startActivity(next);
     }
@@ -71,6 +74,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        spinner = (ProgressBar)findViewById(R.id.progressBar);
+        spinner.setVisibility(View.GONE);
         email = findViewById(R.id.editTextTextEmailAddress);
         pass = findViewById(R.id.editTextTextPassword);
         String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
