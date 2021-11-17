@@ -27,6 +27,8 @@ import java.util.Map;
 public class Register extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     static String branch;
+    static String originalBranch;
+    static String originalBatch;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     static String batch;
 
@@ -82,7 +84,18 @@ public class Register extends AppCompatActivity {
         user.put("email", email);
         user.put("branch",branch);
         user.put("batch", batch);
-        user.put("flag",0);
+        user.put("CLASS REPRESENTATIVEflag",0);
+        user.put("PRESIDENTflag",0);
+        user.put("VICE PRESIDENTflag",0);
+        user.put("CULTURAL SECRETARYflag",0);
+        user.put("SPORTS SECRETARYflag",0);
+        user.put("SECRETARY OF ACADEMIC AFFAIRSflag",0);
+        user.put("SECRETARY OF EXTERNAL AFFAIRSflag",0);
+        user.put("SECRETARY OF SENATEflag",0);
+
+
+
+
         db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
         Intent next = new Intent(this, Options.class);
         startActivity(next);
@@ -112,6 +125,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
                 branch = mySpinner.getSelectedItem().toString();
+                originalBranch=branch;
                 //Toast.makeText(getApplicationContext(), branch , Toast.LENGTH_SHORT).show();
             }
 
@@ -125,6 +139,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
                 batch = mySpinner2.getSelectedItem().toString();
+                originalBatch=batch;
                 //Toast.makeText(getApplicationContext(), branch , Toast.LENGTH_SHORT).show();
             }
 

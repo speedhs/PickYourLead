@@ -11,6 +11,7 @@ import android.widget.Spinner;
 
 public class PollsList extends AppCompatActivity {
 
+    static String pollsOption;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +28,15 @@ public class PollsList extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
                 String item = mySpinner.getSelectedItem().toString();
+                pollsOption=item;
+                if(!(item.equals("CLASS REPRESENTATIVE"))){
+                    Register.branch=item;
+                    Register.batch="2022";
+                }
+                else{
+                    Register.branch=Register.originalBranch;
+                    Register.batch=Register.originalBatch;
+                }
                 //Toast.makeText(getApplicationContext(), branch , Toast.LENGTH_SHORT).show();
 
 

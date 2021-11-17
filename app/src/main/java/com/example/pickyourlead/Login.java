@@ -10,10 +10,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class Login extends AppCompatActivity {
     private EditText email, pass;
     FirebaseAuth mAuth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public void options_page(View view) {//moving to next screen
         System.out.println("suc");
@@ -67,6 +73,10 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         email = findViewById(R.id.editTextTextEmailAddress);
         pass = findViewById(R.id.editTextTextPassword);
+        String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
+
         Button btn_login = findViewById(R.id.button2);
         mAuth = FirebaseAuth.getInstance();
         btn_login.setOnClickListener(v -> {
@@ -94,6 +104,25 @@ public class Login extends AppCompatActivity {
             }
             mAuth.signInWithEmailAndPassword(str_email, str_pass).addOnCompleteListener(task -> {
                 if(task.isSuccessful()) {
+                    db.collection("users").document(uId).get()
+                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    if (documentSnapshot.exists()) {
+
+                                        Register.branch= (String) documentSnapshot.get("branch");
+                                        Register.originalBranch=Register.branch;
+                                        Register.batch= (String) documentSnapshot.get("batch");
+                                        Register.originalBatch=Register.batch;
+
+
+                                    }
+                                    else {
+                                        // vote();
+                                        Toast.makeText(Login.this, "Please try again", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                     startActivity(new Intent(Login.this, Options.class));
                 }
                 else {

@@ -13,15 +13,15 @@
     </string-array>
 
     <string-array name="council_elections">
-        <item>Class Representative</item>
-        <item>President</item>
-        <item>Vice President</item>
-        <item>Cultural Secretary</item>
-        <item>Sports Head</item>
-        <item>Secretary of Academic Affairs</item>
-        <item>Secretary of External Affairs</item>
-        <item>Secretary of Senate</item>
-        <item>Secretary of Campus Affairs</item>
+        <item>CLASS REPRESENTATIVE</item>
+        <item>PRESIDENT</item>
+        <item>VICE PRESIDENT</item>
+        <item>CULTURAL SECRETARY</item>
+        <item>SPORTS SECRETARY</item>
+        <item>SECRETARY OF ACADEMIC AFFAIRS</item>
+        <item>SECRETARY OF EXTERNAL AFFAIRS</item>
+        <item>SECRETARY OF SENATE</item>
+
     </string-array>
 
     <string-array name="batch">

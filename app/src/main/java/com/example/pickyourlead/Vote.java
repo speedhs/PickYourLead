@@ -80,12 +80,12 @@ public class Vote extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
-                            flagStatus=documentSnapshot.getLong("flag");
+                            flagStatus=documentSnapshot.getLong(PollsList.pollsOption+"flag");
                             System.out.println("FLAG STATUS ---->"+flagStatus);
                             if(flagStatus==0){
                                 db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).update(option, FieldValue.increment(1));
-                                db.collection("users").document(Options.uId).update("flag", FieldValue.increment(1));
-                                Toast.makeText(Vote.this, option+"->... clicked", Toast.LENGTH_SHORT).show();
+                                db.collection("users").document(Options.uId).update(PollsList.pollsOption+"flag", FieldValue.increment(1));
+                                Toast.makeText(Vote.this, option+" clicked", Toast.LENGTH_SHORT).show();
                             }
 
                             else{
