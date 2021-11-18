@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -59,6 +60,26 @@ public class Register extends AppCompatActivity {
         pass=findViewById(R.id.editTextTextPassword2);
         String password=pass.getText().toString();
         String email=mail.getText().toString();
+        if  (email.isEmpty()) {
+            mail.setError("Email is empty");
+            mail.requestFocus();
+            return;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            mail.setError("Enter a valid email id");
+            mail.requestFocus();
+            return;
+        }
+        if (password.isEmpty()) {
+            pass.setError("Password is empty");
+            pass.requestFocus();
+            return;
+        }
+        if (password.length()<6) {
+            pass.setError("Length of password should be more than 6");
+            pass.requestFocus();
+            return;
+        }
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

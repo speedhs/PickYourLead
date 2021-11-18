@@ -12,11 +12,12 @@
         android:layout_height="wrap_content"
         android:onClick="onClickVirat"
         android:text="Button1"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.798" />
+        app:layout_constraintVertical_bias="0.25" />
 
     <Button
         android:id="@+id/button7"
@@ -24,26 +25,28 @@
         android:layout_height="wrap_content"
         android:onClick="onClickRohit"
         android:text="Button2"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.39" />
 
     <Button
         android:id="@+id/button9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="159dp"
-        android:layout_marginTop="134dp"
         android:layout_marginEnd="158dp"
         android:layout_marginBottom="52dp"
-        android:text="Button3"
         android:onClick="onClickYuzi"
-        app:layout_constraintBottom_toTopOf="@+id/button6"
+        android:text="Button3"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.58000004" />
 
     <TextView
         android:id="@+id/textView6"
@@ -54,10 +57,12 @@
         android:layout_marginEnd="200dp"
         android:layout_marginBottom="631dp"
         android:fontFamily="@font/almendra"
-        android:text="Vote for these candidates: "
+        android:text="The candidates for this position are: "
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

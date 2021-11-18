@@ -105,11 +105,11 @@ public class Login extends AppCompatActivity {
                 pass.requestFocus();
                 return;
             }
-            if (str_pass.length()<6) {
-                pass.setError("Length of password should be more than 6");
-                pass.requestFocus();
-                return;
-            }
+//            if (str_pass.length()<6) {
+//                pass.setError("Length of password should be more than 6");
+//                pass.requestFocus();
+//                return;
+//            }
             mAuth.signInWithEmailAndPassword(str_email, str_pass).addOnCompleteListener(task -> {
                 if(task.isSuccessful()) {
                     String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();

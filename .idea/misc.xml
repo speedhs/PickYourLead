@@ -20,16 +20,16 @@
         <entry key="..\:/Users/dgdev/OneDrive/Documents/GitHub/PickYourLead/app/src/main/res/layout/drop_down_item.xml" value="0.12708333333333333" />
         <entry key="..\:/Users/dgdev/OneDrive/Documents/GitHub/PickYourLead/app/src/main/res/mipmap-anydpi-v26/icon.xml" value="0.14322916666666666" />
         <entry key="app/src/main/res/layout/activity_conduct_poll.xml" value="0.13647830474268416" />
-        <entry key="app/src/main/res/layout/activity_home.xml" value="0.19021739130434784" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2950741398572954" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/layout/activity_options.xml" value="0.13647830474268416" />
         <entry key="app/src/main/res/layout/activity_poll_lists2.xml" value="0.13647830474268416" />
-        <entry key="app/src/main/res/layout/activity_polls_list.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_polls_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_portfolio.xml" value="0.12815338042381433" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.39851404960596826" />
         <entry key="app/src/main/res/layout/activity_results.xml" value="0.17074275362318841" />
-        <entry key="app/src/main/res/layout/activity_vote.xml" value="0.17074275362318841" />
+        <entry key="app/src/main/res/layout/activity_vote.xml" value="0.25" />
         <entry key="app/src/main/res/layout/analysis.xml" value="0.1890625" />
       </map>
     </option>
