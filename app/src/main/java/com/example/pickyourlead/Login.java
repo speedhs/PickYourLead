@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
     private EditText email, pass;
     FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    String uId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
     private ProgressBar spinner;
 
     public void options_page(View view) {//moving to next screen
@@ -112,6 +112,7 @@ public class Login extends AppCompatActivity {
             }
             mAuth.signInWithEmailAndPassword(str_email, str_pass).addOnCompleteListener(task -> {
                 if(task.isSuccessful()) {
+                    String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     db.collection("users").document(uId).get()
                             .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
