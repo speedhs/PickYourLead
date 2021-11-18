@@ -17,10 +17,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 public class Login extends AppCompatActivity {
     private EditText email, pass;
     FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String uId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
     private ProgressBar spinner;
 
     public void options_page(View view) {//moving to next screen
@@ -78,7 +81,7 @@ public class Login extends AppCompatActivity {
         spinner.setVisibility(View.GONE);
         email = findViewById(R.id.editTextTextEmailAddress);
         pass = findViewById(R.id.editTextTextPassword);
-        String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
 
 
