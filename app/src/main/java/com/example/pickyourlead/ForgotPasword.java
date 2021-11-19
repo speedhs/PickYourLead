@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPasword extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private EditText email = findViewById(R.id.forgotpassword);
+    private EditText email ;
 
     public void reset_pass (View view) {
         String str_email = email.getText().toString();
@@ -36,7 +36,7 @@ public class ForgotPasword extends AppCompatActivity {
                     Toast.makeText(ForgotPasword.this, "Check your mail", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Toast.makeText(ForgotPasword.this, "Try Again", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPasword.this, "Sorry, this email is not registered", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -46,6 +46,7 @@ public class ForgotPasword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_pasword);
+        email= findViewById(R.id.forgotpassword);
 
     }
 }

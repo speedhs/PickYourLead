@@ -26,7 +26,7 @@
         android:layout_height="84dp"
         android:layout_marginTop="356dp"
         android:onClick="viewResults"
-        android:text="VIEW PAST RESULTS"
+        android:text="VIEW RESULTS"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
