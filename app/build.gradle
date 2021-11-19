@@ -8,12 +8,13 @@ android {
 
     defaultConfig {
         applicationId "com.example.pickyourlead"
-        minSdk 29
+        minSdk 26
         targetSdk 31
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        minSdkVersion 26
     }
 
     buildTypes {
