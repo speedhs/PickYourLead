@@ -34,6 +34,11 @@ public class Login extends AppCompatActivity {
         startActivity(next);
     }
 
+    public void forgot_pass(View view) {
+        Intent next = new Intent(this, ForgotPasword.class);
+        startActivity(next);
+    }
+
 //    public void login() {
 //        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 //        // Initialize Firebase Auth
@@ -81,9 +86,6 @@ public class Login extends AppCompatActivity {
         spinner.setVisibility(View.GONE);
         email = findViewById(R.id.editTextTextEmailAddress);
         pass = findViewById(R.id.editTextTextPassword);
-
-
-
 
         Button btn_login = findViewById(R.id.button2);
         mAuth = FirebaseAuth.getInstance();
