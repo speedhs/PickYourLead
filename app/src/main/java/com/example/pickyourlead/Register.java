@@ -118,6 +118,16 @@ public class Register extends AppCompatActivity {
         user.put("SECRETARY OF EXTERNAL AFFAIRSflag",0);
         user.put("SECRETARY OF SENATEflag",0);
 
+        user.put("CLASS REPRESENTATIVEcand",0);
+        user.put("PRESIDENTcand",0);
+        user.put("VICE PRESIDENTcand",0);
+        user.put("CULTURAL SECRETARYcand",0);
+        user.put("SPORTS SECRETARYcand",0);
+        user.put("SECRETARY OF ACADEMIC AFFAIRScand",0);
+        user.put("SECRETARY OF EXTERNAL AFFAIRScand",0);
+        user.put("SECRETARY OF SENATEcand",0);
+
+
 
 
 

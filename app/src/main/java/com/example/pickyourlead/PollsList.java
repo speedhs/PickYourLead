@@ -54,6 +54,10 @@ public class PollsList extends AppCompatActivity {
             Intent intent = new Intent(PollsList.this, Vote.class);
             startActivity(intent);
         }
+        else if(Home.nextpage.equals("Contest")){
+            Intent intent = new Intent(PollsList.this, ContestElection.class);
+            startActivity(intent);
+        }
         else{
             Intent intent = new Intent(PollsList.this, Results.class);
             startActivity(intent);

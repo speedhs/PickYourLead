@@ -73,4 +73,10 @@ public class Options extends AppCompatActivity {
                     }
                 });
     }
+
+    public void contestElection(View view){
+        Home.nextpage= "Contest";
+        Intent next=new Intent(Options.this,PollsList.class);
+        startActivity(next);
+    }
 }

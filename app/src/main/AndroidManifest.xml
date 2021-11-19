@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PickYourLead">
         <activity
+            android:name=".ContestElection"
+            android:exported="false" />
+        <activity
             android:name=".ForgotPasword"
             android:exported="true" />
         <activity

@@ -32,18 +32,53 @@ public class Vote extends AppCompatActivity {
     Long flagStatus;
     String cad0, cad1, cad2;
 
-
+    long num;
     String option;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                        num=documentSnapshot.getLong("num");
+
+                        } else {
+                            Toast.makeText(Vote.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+        b_one=findViewById(R.id.button6);
+        b_two=findViewById(R.id.button7);
+        b_three=findViewById(R.id.button9);
+
+        if(num==0){
+            b_one.setVisibility(View.GONE);
+            b_two.setVisibility(View.GONE);
+            b_three.setVisibility(View.GONE);
+        }
+        else if(num==1){
+            b_one.setVisibility(View.VISIBLE);
+            b_two.setVisibility(View.GONE);
+            b_three.setVisibility(View.GONE);
+        }
+        else if(num==2){
+            b_one.setVisibility(View.VISIBLE);
+            b_two.setVisibility(View.VISIBLE);
+            b_three.setVisibility(View.GONE);
+        }
+        else{
+            b_one.setVisibility(View.VISIBLE);
+            b_two.setVisibility(View.VISIBLE);
+            b_three.setVisibility(View.VISIBLE);
+        }
         setContentView(R.layout.activity_vote);
-
-
-        b_two=findViewById(R.id.button6);
-        b_three=findViewById(R.id.button7);
-        b_one=findViewById(R.id.button9);
         vote2();
     }
 
@@ -69,6 +104,7 @@ public class Vote extends AppCompatActivity {
     public void onClickYuzi(View view) {
 
         button_one=findViewById(R.id.button9);
+
         option=button_one.getText().toString();
         vote();
     }
@@ -109,6 +145,7 @@ public class Vote extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
+
                             cad0=documentSnapshot.getString("0");
                             System.out.println("CAD 0 ---->"+cad0);
                             b_one.setText(cad0);
