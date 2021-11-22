@@ -38,8 +38,6 @@ public class PollsList extends AppCompatActivity {
                     Register.batch=Register.originalBatch;
                 }
                 //Toast.makeText(getApplicationContext(), branch , Toast.LENGTH_SHORT).show();
-
-
             }
 
             @Override
