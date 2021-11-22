@@ -158,6 +158,7 @@ public class ContestElection extends AppCompatActivity {
                             Map<String, Object> user = new HashMap<>();
                             user.put(Long.toString(counter), sub.getText().toString());
                             user.put(sub.getText().toString(),0);
+                            user.put(sub.getText().toString()+"uId",Options.uId);
 
                             db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).set(user, SetOptions.merge());
                             db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).update("num", FieldValue.increment(1));
