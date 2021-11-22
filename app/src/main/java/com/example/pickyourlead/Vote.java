@@ -38,6 +38,14 @@ public class Vote extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_vote);
+        b_one=findViewById(R.id.button6);
+        b_two=findViewById(R.id.button7);
+        b_three=findViewById(R.id.button9);
+
+        b_one.setVisibility(View.INVISIBLE);
+        b_two.setVisibility(View.INVISIBLE);
+        b_three.setVisibility(View.INVISIBLE);
 
 
         db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).get()
@@ -46,39 +54,42 @@ public class Vote extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
                         num=documentSnapshot.getLong("num");
+                        System.out.println("NUM KI VAL=->>>>>>>>"+num);
+                            if(num==0){
+                                System.out.println("1");
+                            }
+                            else if(num==1){
+                                b_one.setVisibility(View.VISIBLE);
 
-                        } else {
+                            }
+                            else if(num==2){
+                                b_one.setVisibility(View.VISIBLE);
+                                b_two.setVisibility(View.VISIBLE);
+
+                            }
+                            else{
+                                b_one.setVisibility(View.VISIBLE);
+                                b_two.setVisibility(View.VISIBLE);
+                                b_three.setVisibility(View.VISIBLE);
+                            }
+
+
+
+
+                        }
+                        else {
                             Toast.makeText(Vote.this, "Document does not exist", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
 
-        b_one=findViewById(R.id.button6);
-        b_two=findViewById(R.id.button7);
-        b_three=findViewById(R.id.button9);
 
-        if(num==0){
-            b_one.setVisibility(View.GONE);
-            b_two.setVisibility(View.GONE);
-            b_three.setVisibility(View.GONE);
-        }
-        else if(num==1){
-            b_one.setVisibility(View.VISIBLE);
-            b_two.setVisibility(View.GONE);
-            b_three.setVisibility(View.GONE);
-        }
-        else if(num==2){
-            b_one.setVisibility(View.VISIBLE);
-            b_two.setVisibility(View.VISIBLE);
-            b_three.setVisibility(View.GONE);
-        }
-        else{
-            b_one.setVisibility(View.VISIBLE);
-            b_two.setVisibility(View.VISIBLE);
-            b_three.setVisibility(View.VISIBLE);
-        }
-        setContentView(R.layout.activity_vote);
+
+
+
+
+
         vote2();
     }
 
@@ -155,7 +166,29 @@ public class Vote extends AppCompatActivity {
                             cad2=documentSnapshot.getString("2");
                             System.out.println("CAD 2 ---->"+cad2);
                             b_three.setText(cad2);
+                           // num=documentSnapshot.getLong("num");
 
+//                            if(num==0){
+//                                b_one.setVisibility(View.INVISIBLE);
+//                                b_two.setVisibility(View.INVISIBLE);
+//                                b_three.setVisibility(View.INVISIBLE);
+//                            }
+//                            else if(num==1){
+//                                b_one.setVisibility(View.VISIBLE);
+//                                b_two.setVisibility(View.INVISIBLE);
+//                                b_three.setVisibility(View.INVISIBLE);
+//                            }
+//                            else if(num==2){
+//                                b_one.setVisibility(View.VISIBLE);
+//                                b_two.setVisibility(View.VISIBLE);
+//                                b_three.setVisibility(View.INVISIBLE);
+//                            }
+//                            else{
+//                                b_one.setVisibility(View.VISIBLE);
+//                                b_two.setVisibility(View.VISIBLE);
+//                                b_three.setVisibility(View.VISIBLE);
+//                            }
+//                            setContentView(R.layout.activity_vote);
 
                         } else {
                             Toast.makeText(Vote.this, "Document does not exist", Toast.LENGTH_SHORT).show();

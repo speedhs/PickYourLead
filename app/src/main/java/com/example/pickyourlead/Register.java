@@ -61,25 +61,30 @@ public class Register extends AppCompatActivity {
         String password=pass.getText().toString();
         String email=mail.getText().toString();
         if  (email.isEmpty()) {
+            spinner.setVisibility(View.INVISIBLE);
             mail.setError("Email is empty");
             mail.requestFocus();
             return;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            spinner.setVisibility(View.INVISIBLE);
             mail.setError("Enter a valid email id");
             mail.requestFocus();
             return;
         }
         if (password.isEmpty()) {
+            spinner.setVisibility(View.INVISIBLE);
             pass.setError("Password is empty");
             pass.requestFocus();
             return;
         }
         if (password.length()<6) {
+            spinner.setVisibility(View.INVISIBLE);
             pass.setError("Length of password should be more than 6");
             pass.requestFocus();
             return;
         }
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -88,13 +93,16 @@ public class Register extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                            // Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
                             storefire(email);
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             //Log.w(TAG, "createUserWithEmail:failure", task.getException());
+
                             Toast.makeText(Register.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                            spinner.setVisibility(View.INVISIBLE);
                             //updateUI(null);
                         }
                     }
@@ -136,6 +144,7 @@ public class Register extends AppCompatActivity {
 
         Intent next = new Intent(this, Options.class);
         startActivity(next);
+        spinner.setVisibility(View.INVISIBLE);
     }
 
 

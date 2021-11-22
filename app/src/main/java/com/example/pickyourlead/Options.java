@@ -14,13 +14,14 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Options extends AppCompatActivity {
-    static String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    static String uId;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     boolean flag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
+        uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
     public void activePoll(View view) {
@@ -79,4 +80,11 @@ public class Options extends AppCompatActivity {
         Intent next=new Intent(Options.this,PollsList.class);
         startActivity(next);
     }
+
+
+//    public void signOut(View view){
+//
+//        FirebaseAuth.getInstance().signOut();
+//        startActivity(new Intent(Options.this, Home.class));
+//    }
 }

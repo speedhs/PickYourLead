@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ContestElection extends AppCompatActivity {
     EditText sub;
-    long flagStatus;
+
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
@@ -36,16 +36,18 @@ public class ContestElection extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
-                            flagStatus=documentSnapshot.getLong(PollsList.pollsOption+"cand");
+                            System.out.println("UID------->>>"+Options.uId);
+                            long flagStatus=documentSnapshot.getLong(PollsList.pollsOption+"cand");
                             System.out.println("FLAG STATUS ---->"+flagStatus);
                             if(flagStatus==0){
 
                                 db.collection("users").document(Options.uId).update(PollsList.pollsOption+"cand", FieldValue.increment(1));
+                                Toast.makeText(ContestElection.this, "Thank you!", Toast.LENGTH_SHORT).show();
                                 storecand();
                             }
 
                             else{
-                                Toast.makeText(ContestElection.this, "Better luck next time", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ContestElection.this, "Sorry you have already contested for this position", Toast.LENGTH_LONG).show();
                             }
 //
 
