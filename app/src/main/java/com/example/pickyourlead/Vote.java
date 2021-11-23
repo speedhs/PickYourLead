@@ -15,9 +15,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -40,14 +43,15 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Vote extends AppCompatActivity {
-
-
+    ImageView gif1, gif2;
     Button b_one, b_two, b_three;
     Button p_one,p_two,p_three;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Long flagStatus;
     String cad0, cad1, cad2;
     String uid1, uid2, uid3;
+
+    TextView p1, p2, p3;
 
     long num;
     String option;
@@ -70,6 +74,11 @@ public class Vote extends AppCompatActivity {
         p_one=findViewById(R.id.port1);
         p_two=findViewById(R.id.port2);
         p_three=findViewById(R.id.port3);
+        gif1 = findViewById(R.id.votegif);
+        gif2 = findViewById(R.id.tygif);
+
+        Glide.with(this).load(R.drawable.votegif).into(gif1);
+
 
         b_one.setVisibility(View.INVISIBLE);
         b_two.setVisibility(View.INVISIBLE);
@@ -119,17 +128,17 @@ public class Vote extends AppCompatActivity {
 
         //String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         //StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-        storageReference.child("portfolio/").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                // Got the download URL for 'users/me/profile.png'
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
+//        storageReference.child("portfolio/").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                // Got the download URL for 'users/me/profile.png'
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                // Handle any errors
+//            }
+//        });
 //        final StorageReference filepath = storageReference.child("portfolio").child(uid + ".pdf");
 //        dbRef = FirebaseDatabase.getInstance().getReference().child("portfolio").child(uid + ".pdf");
 //        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -155,17 +164,25 @@ public class Vote extends AppCompatActivity {
 
     public void onClickBtn1(View view) {
         option = b_one.getText().toString();
+        Glide.with(this).load(R.drawable.tygif).into(gif2);
+        gif1.setVisibility(View.GONE);
         vote();
     }
 
     public void onClickBtn2(View view) {
         option = b_two.getText().toString();
+        Glide.with(this).load(R.drawable.tygif).into(gif2);
+        gif1.setVisibility(View.GONE);
         vote();
+        //gif2.setVisibility(View.INVISIBLE);
     }
 
     public void onClickBtn3(View view) {
         option = b_three.getText().toString();
+        Glide.with(this).load(R.drawable.tygif).into(gif2);
+        gif1.setVisibility(View.GONE);
         vote();
+        //gif2.setVisibility(View.VISIBLE);
     }
 
     public void vote() {
@@ -179,10 +196,12 @@ public class Vote extends AppCompatActivity {
                             if(flagStatus==0){
                                 db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).update(option, FieldValue.increment(1));
                                 db.collection("users").document(Options.uId).update(PollsList.pollsOption+"flag", FieldValue.increment(1));
-                                Toast.makeText(Vote.this, option+" clicked", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Vote.this, option+" clicked", Toast.LENGTH_LONG).show();
+                                gif2.setVisibility(View.VISIBLE);
                             }
                             else{
-                                Toast.makeText(Vote.this, "Sorry,you have already voted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Vote.this, "Sorry,you have already voted", Toast.LENGTH_LONG).show();
+                                gif2.setVisibility(View.INVISIBLE);
                             }
                         }
                         else {
@@ -269,12 +288,10 @@ public class Vote extends AppCompatActivity {
 
     public void view1(View view) throws IOException {
         portfolio(uid1);
-
     }
 
     public void view2(View view) throws IOException {
         portfolio(uid2);
-
     }
 
     public void view3(View view) throws IOException {
