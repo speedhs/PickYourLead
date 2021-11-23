@@ -1,10 +1,13 @@
 package com.example.pickyourlead;
 
 import static android.content.ContentValues.TAG;
+import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -38,8 +41,9 @@ import java.util.Objects;
 
 public class Vote extends AppCompatActivity {
 
-    Button button_one;
+
     Button b_one, b_two, b_three;
+    Button p_one,p_two,p_three;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Long flagStatus;
     String cad0, cad1, cad2;
@@ -63,10 +67,16 @@ public class Vote extends AppCompatActivity {
         b_one=findViewById(R.id.button6);
         b_two=findViewById(R.id.button7);
         b_three=findViewById(R.id.button9);
+        p_one=findViewById(R.id.port1);
+        p_two=findViewById(R.id.port2);
+        p_three=findViewById(R.id.port3);
 
         b_one.setVisibility(View.INVISIBLE);
         b_two.setVisibility(View.INVISIBLE);
         b_three.setVisibility(View.INVISIBLE);
+        p_one.setVisibility(View.INVISIBLE);
+        p_two.setVisibility(View.INVISIBLE);
+        p_three.setVisibility(View.INVISIBLE);
 
         // view1 = findViewById(R.id.port1);
 
@@ -82,15 +92,22 @@ public class Vote extends AppCompatActivity {
                             }
                             else if(num==1){
                                 b_one.setVisibility(View.VISIBLE);
+                                p_one.setVisibility(View.VISIBLE);
                             }
                             else if(num==2){
                                 b_one.setVisibility(View.VISIBLE);
                                 b_two.setVisibility(View.VISIBLE);
+                                p_one.setVisibility(View.VISIBLE);
+                                p_two.setVisibility(View.VISIBLE);
+
                             }
                             else{
                                 b_one.setVisibility(View.VISIBLE);
                                 b_two.setVisibility(View.VISIBLE);
                                 b_three.setVisibility(View.VISIBLE);
+                                p_one.setVisibility(View.VISIBLE);
+                                p_two.setVisibility(View.VISIBLE);
+                                p_three.setVisibility(View.VISIBLE);
                             }
                         }
                         else {
@@ -204,39 +221,50 @@ public class Vote extends AppCompatActivity {
 
     }
 
-//    public void portfolio(String uID) {
-//        System.out.println("==========================================================================" + uID);
-//        storageReference.child("portfolio/" + uID + ".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//            @Override
-//            public void onSuccess(Uri uri) {
-//                // Got the download URL for 'users/me/profile.png'
-//
-//
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception exception) {
-//                // Handle any errors
-//                Toast.makeText(Vote.this, "Error", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//    }
-
-    public void portfolio(String uID) throws IOException {
-        StorageReference storageRef = storageReference.child("portfolio/" + uID + "pdf");
-        File localFile = File.createTempFile("port", "pdf");
-        storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+    public void portfolio(String uID) {
+        System.out.println("==========================================================================" + uID);
+        storageReference.child("portfolio/" + uID + ".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                // Local temp file has been created
+            public void onSuccess(Uri uri) {
+                // Got the download URL for 'users/me/profile.png'
+               // Toast.makeText(Vote.this, "Worked", Toast.LENGTH_SHORT).show();
+                String url=uri.toString();
+                downloadFile(Vote.this,"Mobile",".pdf",DIRECTORY_DOWNLOADS,url);
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle any errors
+                Toast.makeText(Vote.this, "Error", Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+//    public void portfolio(String uID) throws IOException {
+//        StorageReference storageRef = storageReference.child("portfolio/" + uID + ".pdf");
+//        File localFile = File.createTempFile("port", "pdf");
+//        storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                // Local temp file has been created
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                // Handle any errors
+//            }
+//        });
+//    }
+
+    public void downloadFile(Context context,String fileName,String fileExtension,String destinationDirectory,String url){
+        DownloadManager downloadManager= (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri=Uri.parse(url);
+        DownloadManager.Request request=new DownloadManager.Request(uri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalFilesDir(context,destinationDirectory,fileName+fileExtension);
+        downloadManager.enqueue(request);
     }
 
     public void view1(View view) throws IOException {
