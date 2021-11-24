@@ -7,15 +7,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.bumptech.glide.Glide;
+
 public class PollsList extends AppCompatActivity {
+    ImageView gif1;
 
     static String pollsOption;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_polls_list);
+        gif1 = findViewById(R.id.listgif);
+        Glide.with(this).load(R.drawable.listgif).into(gif1);
 
         Spinner mySpinner = (Spinner) findViewById(R.id.spinner);
 

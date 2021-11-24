@@ -45,7 +45,8 @@ import java.util.Objects;
 public class Vote extends AppCompatActivity {
     ImageView gif1, gif2;
     Button b_one, b_two, b_three;
-    Button p_one,p_two,p_three;
+    //Button p_one,p_two,p_three;
+    //Button p_two, p_three;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Long flagStatus;
     String cad0, cad1, cad2;
@@ -71,21 +72,26 @@ public class Vote extends AppCompatActivity {
         b_one=findViewById(R.id.button6);
         b_two=findViewById(R.id.button7);
         b_three=findViewById(R.id.button9);
-        p_one=findViewById(R.id.port1);
-        p_two=findViewById(R.id.port2);
-        p_three=findViewById(R.id.port3);
+        //p_one=findViewById(R.id.port1);
+        //p_two=findViewById(R.id.port2);
+        //p_three=findViewById(R.id.port3);
+        p1 = findViewById(R.id.textView15);
+        p2 = findViewById(R.id.textView16);
+        p3 = findViewById(R.id.textView17);
         gif1 = findViewById(R.id.votegif);
         gif2 = findViewById(R.id.tygif);
 
         Glide.with(this).load(R.drawable.votegif).into(gif1);
 
-
         b_one.setVisibility(View.INVISIBLE);
         b_two.setVisibility(View.INVISIBLE);
         b_three.setVisibility(View.INVISIBLE);
-        p_one.setVisibility(View.INVISIBLE);
-        p_two.setVisibility(View.INVISIBLE);
-        p_three.setVisibility(View.INVISIBLE);
+        //p_one.setVisibility(View.INVISIBLE);
+        //p_two.setVisibility(View.INVISIBLE);
+        //p_three.setVisibility(View.INVISIBLE);
+        p1.setVisibility(View.INVISIBLE);
+        p2.setVisibility(View.INVISIBLE);
+        p3.setVisibility(View.INVISIBLE);
 
         // view1 = findViewById(R.id.port1);
 
@@ -101,22 +107,28 @@ public class Vote extends AppCompatActivity {
                             }
                             else if(num==1){
                                 b_one.setVisibility(View.VISIBLE);
-                                p_one.setVisibility(View.VISIBLE);
+                                //p_one.setVisibility(View.VISIBLE);
+                                p1.setVisibility(View.VISIBLE);
                             }
                             else if(num==2){
                                 b_one.setVisibility(View.VISIBLE);
                                 b_two.setVisibility(View.VISIBLE);
-                                p_one.setVisibility(View.VISIBLE);
-                                p_two.setVisibility(View.VISIBLE);
+                                //p_one.setVisibility(View.VISIBLE);
+                                //p_two.setVisibility(View.VISIBLE);
+                                p1.setVisibility(View.VISIBLE);
+                                p2.setVisibility(View.VISIBLE);
 
                             }
                             else{
                                 b_one.setVisibility(View.VISIBLE);
                                 b_two.setVisibility(View.VISIBLE);
                                 b_three.setVisibility(View.VISIBLE);
-                                p_one.setVisibility(View.VISIBLE);
-                                p_two.setVisibility(View.VISIBLE);
-                                p_three.setVisibility(View.VISIBLE);
+                                //p_one.setVisibility(View.VISIBLE);
+                                //p_two.setVisibility(View.VISIBLE);
+                                //p_three.setVisibility(View.VISIBLE);
+                                p1.setVisibility(View.VISIBLE);
+                                p2.setVisibility(View.VISIBLE);
+                                p3.setVisibility(View.VISIBLE);
                             }
                         }
                         else {
@@ -255,7 +267,7 @@ public class Vote extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle any errors
-                Toast.makeText(Vote.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Vote.this, "Portfolio is not available", Toast.LENGTH_SHORT).show();
             }
         });
 
