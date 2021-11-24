@@ -24,10 +24,11 @@ import org.eazegraph.lib.models.PieModel;
 public class Results extends AppCompatActivity {
      PieChart chart;
     FirebaseFirestore db=FirebaseFirestore.getInstance();
-    String cad0, cad1, cad2;
-     long i1;
-     long i2;
-     long i3;
+    String cad0="NA", cad1="NA", cad2="NA";
+     long i1=0;
+     long i2=0;
+     long i3=0;
+     long num;
 
 
 
@@ -66,20 +67,36 @@ public class Results extends AppCompatActivity {
                             TextView p1=findViewById(R.id.p1);
                             TextView p2=findViewById(R.id.p2);
                             TextView p3=findViewById(R.id.p3);
+
                             cad0=documentSnapshot.getString("0");
+                            num=documentSnapshot.getLong("num");
+                            if(num>0){
                             i1=documentSnapshot.getLong(cad0);
+                                chart.addPieSlice(new PieModel(cad0,i1, Color.parseColor("#FFA726")));
+                            }
 
-                            cad1=documentSnapshot.getString("1");
-                            i2= documentSnapshot.getLong(cad1);
+                            if(num>1) {
+                                cad1 = documentSnapshot.getString("1");
+                                i2 = documentSnapshot.getLong(cad1);
+                                chart.addPieSlice(new PieModel(cad1,i2, Color.parseColor("#66BB6A")));
+                            }
+                            if(num>2) {
+                                cad2 = documentSnapshot.getString("2");
+                                i3 = documentSnapshot.getLong(cad2);
+                                chart.addPieSlice(new PieModel(cad2,i3, Color.parseColor("#EF5350")));
+                            }
 
-                            cad2=documentSnapshot.getString("2");
-                            i3= documentSnapshot.getLong(cad2);
 
 
-                            chart.addPieSlice(new PieModel(cad0,i1, Color.parseColor("#FFA726")));
-                            chart.addPieSlice(new PieModel(cad1,i2, Color.parseColor("#66BB6A")));
-                            chart.addPieSlice(new PieModel(cad2,i3, Color.parseColor("#EF5350")));
-                            double sum=i1+i2+i3;
+
+
+                            double sum=0;
+                             sum= i1+i2+i3;
+
+                            double perc1=(i1/sum)*100;
+                            double perc2=(i2/sum)*100;
+                            double perc3=(i3/sum)*100;
+
                             t1.setText(cad0);
                             t2.setText(cad1);
                             t3.setText(cad2);
@@ -87,14 +104,13 @@ public class Results extends AppCompatActivity {
                             c1.setText(cad0);
                             c2.setText(cad1);
                             c3.setText(cad2);
+                                p1.setText( Double.toString(perc1)+"%");
+                                p2.setText( Double.toString(perc2)+"%");
+                                p3.setText( Double.toString(perc3)+"%");
 
-                            double perc1=(i1/sum)*100;
-                            double perc2=(i2/sum)*100;
-                            double perc3=(i3/sum)*100;
 
-                            p1.setText( Double.toString(perc1)+"%");
-                            p2.setText( Double.toString(perc2)+"%");
-                            p3.setText( Double.toString(perc3)+"%");
+
+
 
 
 
