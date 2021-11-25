@@ -2,13 +2,17 @@ package com.example.pickyourlead;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -29,6 +33,7 @@ public class PollsList extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.council_elections));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
+
 
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -55,17 +60,51 @@ public class PollsList extends AppCompatActivity {
 
     public void navigate(View view){
         if(Home.nextpage.equals("Vote")){
+            boolean net= isConnected();
+            if(net==false){
+                Home.lastpage="PollsList";
+                Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
+                startActivity(new Intent(PollsList.this,LostConnection.class));
+            }
+            else{
             Intent intent = new Intent(PollsList.this, Vote.class);
-            startActivity(intent);
+            startActivity(intent);}
         }
         else if(Home.nextpage.equals("Contest")){
-            Intent intent = new Intent(PollsList.this, ContestElection.class);
-            startActivity(intent);
+            boolean net= isConnected();
+            if(net==false){
+                Home.lastpage="PollsList";
+                Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
+                startActivity(new Intent(PollsList.this,LostConnection.class));
+            }
+           else{ Intent intent = new Intent(PollsList.this, ContestElection.class);
+            startActivity(intent);}
         }
         else{
-            Intent intent = new Intent(PollsList.this, Results.class);
-            startActivity(intent);
+            boolean net= isConnected();
+            if(net==false){
+                Home.lastpage="PollsList";
+                Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
+                startActivity(new Intent(PollsList.this,LostConnection.class));
+            }
+           else{ Intent intent = new Intent(PollsList.this, Results.class);
+            startActivity(intent);}
         }
+    }
+
+    boolean isConnected(){
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo!=null){
+            if(networkInfo.isConnected())
+                return true;
+            else
+                return false;
+        }else
+            return false;
+
     }
 
 

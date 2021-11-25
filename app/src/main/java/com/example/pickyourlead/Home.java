@@ -9,6 +9,7 @@ import android.view.View;
 public class Home extends AppCompatActivity {
 
     static String nextpage;
+    static String lastpage;
     public void login(View view) {//moving to next screen
         System.out.println("suc");
         Intent next = new Intent(this, Login.class);

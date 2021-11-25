@@ -10,6 +10,8 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,6 +53,7 @@ public class Vote extends AppCompatActivity {
     Long flagStatus;
     String cad0, cad1, cad2;
     String uid1, uid2, uid3;
+    boolean internet;
 
     TextView p1, p2, p3;
 
@@ -178,7 +181,14 @@ public class Vote extends AppCompatActivity {
         option = b_one.getText().toString();
         Glide.with(this).load(R.drawable.tygif).into(gif2);
         gif1.setVisibility(View.GONE);
-        vote();
+       internet=isConnected();
+       if(internet){
+        vote();}
+       else{
+           Toast.makeText(getApplicationContext(),"Check your internet connection",Toast.LENGTH_LONG).show();
+           startActivity(new Intent(Vote.this,LostConnection.class));
+       }
+
     }
 
     public void onClickBtn2(View view) {
@@ -308,5 +318,19 @@ public class Vote extends AppCompatActivity {
 
     public void view3(View view) throws IOException {
         portfolio(uid3);
+    }
+    boolean isConnected(){
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo!=null){
+            if(networkInfo.isConnected())
+                return true;
+            else
+                return false;
+        }else
+            return false;
+
     }
 }

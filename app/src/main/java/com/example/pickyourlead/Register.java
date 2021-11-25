@@ -3,7 +3,10 @@ package com.example.pickyourlead;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -40,7 +43,15 @@ public class Register extends AppCompatActivity {
     public void options_page(View view) {//moving to next screen
         spinner.setVisibility(View.VISIBLE);
         System.out.println("suc");
-        re();
+
+        boolean internet=isConnected();
+        if(internet)
+        { re();}
+        else{
+            Toast.makeText(getApplicationContext(),"Internet check kar",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(Register.this,LostConnection.class));
+
+        }
 
     }
 
@@ -198,6 +209,20 @@ public class Register extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
+    }
+    boolean isConnected(){
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo!=null){
+            if(networkInfo.isConnected())
+                return true;
+            else
+                return false;
+        }else
+            return false;
+
     }
 
 

@@ -2,7 +2,10 @@ package com.example.pickyourlead;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -26,13 +29,15 @@ public class Login extends AppCompatActivity {
 
     private ProgressBar spinner;
 
-    public void options_page(View view) {//moving to next screen
-        System.out.println("suc");
-        //login();
-        spinner.setVisibility(View.VISIBLE);
-        Intent next = new Intent(this, Options.class);
-        startActivity(next);
-    }
+//    public void options_page(View view) {//moving to next screen
+//        System.out.println("suc");
+//        //login();
+//
+//
+//
+//        Intent next = new Intent(this, Options.class);
+//        startActivity(next);
+//    }
 
     public void forgot_pass(View view) {
         Intent next = new Intent(this, ForgotPasword.class);
@@ -90,56 +95,80 @@ public class Login extends AppCompatActivity {
         Button btn_login = findViewById(R.id.button2);
         mAuth = FirebaseAuth.getInstance();
         btn_login.setOnClickListener(v -> {
-            String str_email = email.getText().toString().trim();
-            String str_pass = pass.getText().toString().trim();
-            if  (str_email.isEmpty()) {
-                email.setError("Email is empty");
-                email.requestFocus();
-                return;
-            }
-            if (!Patterns.EMAIL_ADDRESS.matcher(str_email).matches()) {
-                email.setError("Enter a valid email id");
-                email.requestFocus();
-                return;
-            }
-            if (str_pass.isEmpty()) {
-                pass.setError("Password is empty");
-                pass.requestFocus();
-                return;
-            }
+           boolean internet=isConnected();
+           if(internet){
+               String str_email = email.getText().toString().trim();
+               String str_pass = pass.getText().toString().trim();
+               if  (str_email.isEmpty()) {
+                   email.setError("Email is empty");
+                   email.requestFocus();
+                   return;
+               }
+               if (!Patterns.EMAIL_ADDRESS.matcher(str_email).matches()) {
+                   email.setError("Enter a valid email id");
+                   email.requestFocus();
+                   return;
+               }
+               if (str_pass.isEmpty()) {
+                   pass.setError("Password is empty");
+                   pass.requestFocus();
+                   return;
+               }
 //            if (str_pass.length()<6) {
 //                pass.setError("Length of password should be more than 6");
 //                pass.requestFocus();
 //                return;
 //            }
-            mAuth.signInWithEmailAndPassword(str_email, str_pass).addOnCompleteListener(task -> {
-                if(task.isSuccessful()) {
-                    String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    db.collection("users").document(uId).get()
-                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                @Override
-                                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                    if (documentSnapshot.exists()) {
+               mAuth.signInWithEmailAndPassword(str_email, str_pass).addOnCompleteListener(task -> {
+                   if(task.isSuccessful()) {
+                       String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                       db.collection("users").document(uId).get()
+                               .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                   @Override
+                                   public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                       if (documentSnapshot.exists()) {
 
-                                        Register.branch= (String) documentSnapshot.get("branch");
-                                        Register.originalBranch=Register.branch;
-                                        Register.batch= (String) documentSnapshot.get("batch");
-                                        Register.originalBatch=Register.batch;
+                                           Register.branch= (String) documentSnapshot.get("branch");
+                                           Register.originalBranch=Register.branch;
+                                           Register.batch= (String) documentSnapshot.get("batch");
+                                           Register.originalBatch=Register.batch;
 
 
-                                    }
-                                    else {
-                                        // vote();
-                                        Toast.makeText(Login.this, "Please try again", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                    startActivity(new Intent(Login.this, Options.class));
-                }
-                else {
-                    Toast.makeText(Login.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
-                }
-            });
+                                       }
+                                       else {
+                                           // vote();
+                                           Toast.makeText(Login.this, "Please try again", Toast.LENGTH_SHORT).show();
+                                       }
+                                   }
+                               });
+
+                       spinner.setVisibility(View.VISIBLE);
+                       startActivity(new Intent(Login.this, Options.class));
+
+                   }
+                   else {
+                       Toast.makeText(Login.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+                   }
+               });
+           }
+           else{
+               Toast.makeText(getApplicationContext(), "Check Internet conn", Toast.LENGTH_SHORT).show();
+               startActivity(new Intent(Login.this,LostConnection.class));
+           }
         });
+    }
+    boolean isConnected(){
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo!=null){
+            if(networkInfo.isConnected())
+                return true;
+            else
+                return false;
+        }else
+            return false;
+
     }
 }
