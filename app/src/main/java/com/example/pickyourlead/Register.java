@@ -41,7 +41,7 @@ public class Register extends AppCompatActivity {
 
 
     public void options_page(View view) {//moving to next screen
-        spinner.setVisibility(View.VISIBLE);
+
         System.out.println("suc");
 
         boolean internet=isConnected();
@@ -83,6 +83,11 @@ public class Register extends AppCompatActivity {
             mail.requestFocus();
             return;
         }
+        if(!email.contains("@snu.edu.in")){
+            mail.setError("Enter your organization's email id");
+            mail.requestFocus();
+            return;
+        }
         if (password.isEmpty()) {
             spinner.setVisibility(View.INVISIBLE);
             pass.setError("Password is empty");
@@ -103,6 +108,7 @@ public class Register extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                            // Log.d(TAG, "createUserWithEmail:success");
+                            spinner.setVisibility(View.VISIBLE);
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             storefire(email);
