@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 //firebase
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class Register extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -37,23 +40,38 @@ public class Register extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     static String batch;
     private ProgressBar spinner;
+    FirebaseUser user;
+    String email=" ";
+    boolean flag=false;
 
 
 
-    public void options_page(View view) {//moving to next screen
+    public void options_page(View view) throws InterruptedException {//moving to next screen
 
-        System.out.println("suc");
+        if (flag) {
+            user.reload();
+            spinner.setVisibility(View.VISIBLE);
+            TimeUnit.SECONDS.sleep(2);
+            if (user.isEmailVerified()) {
 
-        boolean internet=isConnected();
-        if(internet)
-        { re();}
-        else{
-            Toast.makeText(getApplicationContext(),"Internet check kar",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(Register.this,LostConnection.class));
+                storefire(email);
+            }
 
+
+        } else {
+            System.out.println("suc");
+
+            boolean internet = isConnected();
+            if (internet) {
+                re();
+            } else {
+                Toast.makeText(getApplicationContext(), "Internet check kar", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(Register.this, LostConnection.class));
+
+            }
         }
-
     }
+
 
     public void re() {
 
@@ -70,7 +88,7 @@ public class Register extends AppCompatActivity {
         mail=findViewById(R.id.editTextTextEmailAddress2);
         pass=findViewById(R.id.editTextTextPassword2);
         String password=pass.getText().toString();
-        String email=mail.getText().toString();
+         email=mail.getText().toString();
         if  (email.isEmpty()) {
             spinner.setVisibility(View.INVISIBLE);
             mail.setError("Email is empty");
@@ -108,10 +126,22 @@ public class Register extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                            // Log.d(TAG, "createUserWithEmail:success");
-                            spinner.setVisibility(View.VISIBLE);
-                            FirebaseUser user = mAuth.getCurrentUser();
 
-                            storefire(email);
+                            user=mAuth.getCurrentUser();
+                            user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    flag=true;
+                                    Toast.makeText(Register.this, "Verification email has been sent", Toast.LENGTH_LONG).show();
+                                    return ;
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(Register.this, "Firse try kar", Toast.LENGTH_LONG).show();
+                                }
+                            });
+
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
