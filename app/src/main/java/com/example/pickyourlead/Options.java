@@ -17,6 +17,8 @@ public class Options extends AppCompatActivity {
     static String uId;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     boolean flag;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +26,9 @@ public class Options extends AppCompatActivity {
         uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
+
     public void activePoll(View view) {
-
         Home.nextpage= "Vote";
-
         db.collection("flag").document("flag").get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -68,23 +69,16 @@ public class Options extends AppCompatActivity {
                             }
                         }
                         else {
-                            // vote();
                             Toast.makeText(Options.this, "Please try again", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
+
     public void contestElection(View view){
         Home.nextpage= "Contest";
         Intent next=new Intent(Options.this,PollsList.class);
         startActivity(next);
     }
-
-
-//    public void signOut(View view){
-//
-//        FirebaseAuth.getInstance().signOut();
-//        startActivity(new Intent(Options.this, Home.class));
-//    }
 }

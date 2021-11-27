@@ -7,20 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 
 public class Home extends AppCompatActivity {
-
     static String nextpage;
     static String lastpage;
-    public void login(View view) {//moving to next screen
-        System.out.println("suc");
+
+    public void login(View view) {
         Intent next = new Intent(this, Login.class);
         startActivity(next);
     }
-    public void register(View view) {//moving to next screen
-        System.out.println("su");
+
+    public void register(View view) {
         Intent next = new Intent(this, Register.class);
         startActivity(next);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

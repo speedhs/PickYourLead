@@ -10,17 +10,22 @@
         android:id="@+id/imageView2"
         android:layout_width="356dp"
         android:layout_height="401dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="27dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/peasnointernet"
-        tools:layout_editor_absoluteX="28dp" />
+        app:srcCompat="@drawable/peasnointernet" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
         android:text="No Internet"
-        android:textSize="30sp"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,12 +36,32 @@
         android:id="@+id/button8"
         android:layout_width="198dp"
         android:layout_height="61dp"
+        android:layout_marginBottom="104dp"
         android:background="@android:color/holo_green_dark"
         android:backgroundTint="@android:color/holo_green_dark"
         android:onClick="lastPage"
         android:text="TRY AGAIN"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="177dp"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="OOPS"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView18"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45999998" />
 </androidx.constraintlayout.widget.ConstraintLayout>
