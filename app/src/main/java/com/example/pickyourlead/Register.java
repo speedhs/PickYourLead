@@ -47,14 +47,22 @@ public class Register extends AppCompatActivity {
 
 
     public void options_page(View view) throws InterruptedException {//moving to next screen
-
+        
         if (flag) {
+
+
             user.reload();
-            spinner.setVisibility(View.VISIBLE);
-            TimeUnit.SECONDS.sleep(2);
+
+            TimeUnit.SECONDS.sleep(1);
+
+
             if (user.isEmailVerified()) {
 
                 storefire(email);
+            }
+            else{
+                spinner.setVisibility(View.INVISIBLE);
+                Toast.makeText(Register.this, "Please verify your email", Toast.LENGTH_SHORT).show();
             }
 
 
@@ -63,6 +71,7 @@ public class Register extends AppCompatActivity {
 
             boolean internet = isConnected();
             if (internet) {
+                spinner.setVisibility(View.INVISIBLE);
                 re();
             } else {
                 Toast.makeText(getApplicationContext(), "Internet check kar", Toast.LENGTH_LONG).show();
