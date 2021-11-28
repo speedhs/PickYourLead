@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,6 +19,8 @@ public class Options extends AppCompatActivity {
     static String uId;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     boolean flag;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,25 +28,22 @@ public class Options extends AppCompatActivity {
         uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
+
     public void activePoll(View view) {
-
-        Home.nextpage= "Vote";
-
+        Home.nextpage = "Vote";
         db.collection("flag").document("flag").get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
-                            flag=documentSnapshot.getBoolean("VOTE");
-                            if(flag){
-                                Intent next=new Intent(Options.this,PollsList.class);
+                            flag = documentSnapshot.getBoolean("VOTE");
+                            if (flag) {
+                                Intent next = new Intent(Options.this, PollsList.class);
                                 startActivity(next);
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(Options.this, "Sorry Voting Period is over", Toast.LENGTH_SHORT).show();
                             }
-                        }
-                        else {
+                        } else {
                             // vote();
                             Toast.makeText(Options.this, "Please try again", Toast.LENGTH_SHORT).show();
                         }
@@ -51,40 +52,49 @@ public class Options extends AppCompatActivity {
 
     }
 
-    public void viewResults(View view){
-        Home.nextpage= "Results";
+    public void viewResults(View view) {
+        Home.nextpage = "Results";
         db.collection("flag").document("flag").get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
-                            flag=documentSnapshot.getBoolean("RESULT");
-                            if(flag){
-                                Intent next=new Intent(Options.this,PollsList.class);
+                            flag = documentSnapshot.getBoolean("RESULT");
+                            if (flag) {
+                                Intent next = new Intent(Options.this, PollsList.class);
                                 startActivity(next);
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(Options.this, "Sorry voting period is not over", Toast.LENGTH_SHORT).show();
                             }
-                        }
-                        else {
-                            // vote();
+                        } else {
                             Toast.makeText(Options.this, "Please try again", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
-    public void contestElection(View view){
-        Home.nextpage= "Contest";
-        Intent next=new Intent(Options.this,PollsList.class);
+
+    public void contestElection(View view) {
+        Home.nextpage = "Contest";
+        Intent next = new Intent(Options.this, PollsList.class);
         startActivity(next);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_r, menu);
+        return true;
 
-//    public void signOut(View view){
-//
-//        FirebaseAuth.getInstance().signOut();
-//        startActivity(new Intent(Options.this, Home.class));
-//    }
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.out) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(Options.this, Home.class));
+
+        }
+        return true;
+    }
+
 }

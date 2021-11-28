@@ -38,28 +38,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
 
+
     <Button
         android:id="@+id/btnUpload"
-        android:layout_width="296dp"
+        android:layout_width="210dp"
         android:layout_height="91dp"
         android:layout_marginTop="319dp"
         android:onClick="submit"
         android:text="UPLOAD and SUBMIT"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.436"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68" />
-
+        app:layout_constraintVertical_bias="0.557" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="33dp"
         android:fontFamily="@font/almendra"
         android:text="Portfolio: "
@@ -68,23 +67,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.31" />
+        app:layout_constraintVertical_bias="0.34" />
 
     <Button
         android:id="@+id/btnChoose"
-        android:layout_width="140dp"
-        android:layout_height="68dp"
-        android:layout_marginBottom="158dp"
-        android:text="Choose"
-        android:textSize="24sp"
+        android:layout_width="210dp"
+        android:layout_height="81dp"
+        android:text="ATTACH"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintHorizontal_bias="0.436"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55" />
+        app:layout_constraintVertical_bias="0.537" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
