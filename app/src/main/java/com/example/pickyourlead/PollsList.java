@@ -18,9 +18,8 @@ import com.bumptech.glide.Glide;
 
 public class PollsList extends AppCompatActivity {
     ImageView gif1;
+
     static String pollsOption;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +34,13 @@ public class PollsList extends AppCompatActivity {
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
 
+
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
                 String item = mySpinner.getSelectedItem().toString();
-                pollsOption = item;
-                if (!(item.equals("CLASS REPRESENTATIVE"))){
+                pollsOption=item;
+                if(!(item.equals("CLASS REPRESENTATIVE"))){
                     Register.branch=item;
                     Register.batch="2022";
                 }
@@ -48,6 +48,7 @@ public class PollsList extends AppCompatActivity {
                     Register.branch=Register.originalBranch;
                     Register.batch=Register.originalBatch;
                 }
+                //Toast.makeText(getApplicationContext(), branch , Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -58,50 +59,53 @@ public class PollsList extends AppCompatActivity {
     }
 
     public void navigate(View view){
-        if (Home.nextpage.equals("Vote")) {
+        if(Home.nextpage.equals("Vote")){
             boolean net= isConnected();
-            if (net == false) {
+            if(net==false){
                 Home.lastpage="PollsList";
                 Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
                 startActivity(new Intent(PollsList.this,LostConnection.class));
             }
-            else {
-                Intent intent = new Intent(PollsList.this, Vote.class);
-                startActivity(intent);}
+            else{
+            Intent intent = new Intent(PollsList.this, Vote.class);
+            startActivity(intent);}
         }
-        else if (Home.nextpage.equals("Contest")) {
+        else if(Home.nextpage.equals("Contest")){
             boolean net= isConnected();
-            if (net == false) {
+            if(net==false){
                 Home.lastpage="PollsList";
                 Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
                 startActivity(new Intent(PollsList.this,LostConnection.class));
             }
-           else {
-               Intent intent = new Intent(PollsList.this, ContestElection.class);
-               startActivity(intent);}
+           else{ Intent intent = new Intent(PollsList.this, ContestElection.class);
+            startActivity(intent);}
         }
-        else {
+        else{
             boolean net= isConnected();
-            if (net == false) {
+            if(net==false){
                 Home.lastpage="PollsList";
                 Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
                 startActivity(new Intent(PollsList.this,LostConnection.class));
             }
-           else {
-               Intent intent = new Intent(PollsList.this, Results.class);
-               startActivity(intent);}
+           else{ Intent intent = new Intent(PollsList.this, Results.class);
+            startActivity(intent);}
         }
     }
 
-    boolean isConnected() {
+    boolean isConnected(){
+
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo != null) {
+
+        if(networkInfo!=null){
             if(networkInfo.isConnected())
                 return true;
             else
                 return false;
-        } else
+        }else
             return false;
+
     }
+
+
 }

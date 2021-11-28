@@ -15,35 +15,46 @@ import com.bumptech.glide.Glide;
 
 public class LostConnection extends AppCompatActivity {
     ImageView gif1;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lost_connection);
         gif1 = findViewById(R.id.imageView2);
         Glide.with(this).load(R.drawable.peasnointernet).into(gif1);
-    }
 
+
+
+    }
 
     public void lastPage(View view){
+
+       // startActivity(new Intent(LostConnection.this,.class));
+
         boolean internet=isConnected();
-        if (internet) {
-            finish();
-        } else {
+        if(internet){finish();}
+        else{
             Toast.makeText(getApplicationContext(),"Firse check kar",Toast.LENGTH_LONG).show();
         }
+
+
+        //Intent i = new Intent(this,NewLaunchingActivity.Class);
+        //i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Call Only, if you wants to clears the activity stack else ignore it.
+        //startActivity(i);
+        //finish();
     }
 
-    boolean isConnected() {
+    boolean isConnected(){
+
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo != null) {
+
+        if(networkInfo!=null){
             if(networkInfo.isConnected())
                 return true;
             else
                 return false;
-        } else
+        }else
             return false;
+
     }
 }

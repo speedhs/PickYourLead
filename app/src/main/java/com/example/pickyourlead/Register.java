@@ -45,36 +45,59 @@ public class Register extends AppCompatActivity {
     boolean flag=false;
 
 
-    public void options_page(View view) throws InterruptedException {
+
+    public void options_page(View view) throws InterruptedException {//moving to next screen
+        
         if (flag) {
+
+
             user.reload();
+
             TimeUnit.SECONDS.sleep(1);
+
+
             if (user.isEmailVerified()) {
+
                 storefire(email);
             }
             else{
                 spinner.setVisibility(View.INVISIBLE);
-                Toast.makeText(this, "Please verify your email", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Register.this, "Please verify your email", Toast.LENGTH_SHORT).show();
             }
+
+
         } else {
+            System.out.println("suc");
+
             boolean internet = isConnected();
             if (internet) {
-                spinner.setVisibility(View.VISIBLE);
+                spinner.setVisibility(View.INVISIBLE);
                 re();
             } else {
                 Toast.makeText(getApplicationContext(), "Internet check kar", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(Register.this, LostConnection.class));
+
             }
         }
     }
 
 
     public void re() {
+
+        // Initialize Firebase Auth
+//             void onStart(){
+//                 super.onStart();
+//                 // Check if user is signed in (non-null) and update UI accordingly.
+//                 FirebaseUser currentUser = mAuth.getCurrentUser();
+//                 if (currentUser != null) {
+//                     currentUser.reload();
+//                 }
+//             }
         EditText mail,pass;
         mail=findViewById(R.id.editTextTextEmailAddress2);
         pass=findViewById(R.id.editTextTextPassword2);
         String password=pass.getText().toString();
-        email=mail.getText().toString();
+         email=mail.getText().toString();
         if  (email.isEmpty()) {
             spinner.setVisibility(View.INVISIBLE);
             mail.setError("Email is empty");
@@ -104,11 +127,15 @@ public class Register extends AppCompatActivity {
             pass.requestFocus();
             return;
         }
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                           // Log.d(TAG, "createUserWithEmail:success");
+
                             user=mAuth.getCurrentUser();
                             user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -123,14 +150,22 @@ public class Register extends AppCompatActivity {
                                     Toast.makeText(Register.this, "Firse try kar", Toast.LENGTH_LONG).show();
                                 }
                             });
+
+                            //updateUI(user);
                         } else {
-                            Toast.makeText(Register.this, "Sorry, but you are already registered", Toast.LENGTH_SHORT).show();
+                            // If sign in fails, display a message to the user.
+                            //Log.w(TAG, "createUserWithEmail:failure", task.getException());
+
+                            Toast.makeText(Register.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
                             spinner.setVisibility(View.INVISIBLE);
+                            //updateUI(null);
                         }
                     }
                 });
-    }
 
+
+    }
 
     public void storefire(String email)
     {
@@ -156,7 +191,13 @@ public class Register extends AppCompatActivity {
         user.put("SECRETARY OF EXTERNAL AFFAIRScand",0);
         user.put("SECRETARY OF SENATEcand",0);
 
+
+
+
+
         db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
+
+
         Intent next = new Intent(this, Options.class);
         startActivity(next);
         spinner.setVisibility(View.INVISIBLE);
@@ -183,12 +224,15 @@ public class Register extends AppCompatActivity {
         myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner2.setAdapter(myAdapter2);
 
+
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
                 branch = mySpinner.getSelectedItem().toString();
                 originalBranch=branch;
+                //Toast.makeText(getApplicationContext(), branch , Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 // TODO Auto-generated method stub
@@ -199,25 +243,32 @@ public class Register extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
                 batch = mySpinner2.getSelectedItem().toString();
+
+
                 originalBatch=batch;
+                //Toast.makeText(getApplicationContext(), branch , Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 // TODO Auto-generated method stub
             }
         });
     }
+    boolean isConnected(){
 
-
-    boolean isConnected() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo != null) {
+
+        if(networkInfo!=null){
             if(networkInfo.isConnected())
                 return true;
             else
                 return false;
-        } else
+        }else
             return false;
+
     }
+
+
 }

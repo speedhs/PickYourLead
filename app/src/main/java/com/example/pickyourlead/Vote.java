@@ -47,15 +47,25 @@ import java.util.Objects;
 public class Vote extends AppCompatActivity {
     ImageView gif1, gif2;
     Button b_one, b_two, b_three;
-    TextView p1, p2, p3;
+    //Button p_one,p_two,p_three;
+    //Button p_two, p_three;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Long flagStatus;
     String cad0, cad1, cad2;
     String uid1, uid2, uid3;
     boolean internet;
+
+    TextView p1, p2, p3;
+
     long num;
     String option;
+
+//    Button view1;
+//    DatabaseReference dbRef;
+//    String msg;
+
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    //StorageReference storageRef = storage.getReference();
 
 
     @Override
@@ -65,6 +75,9 @@ public class Vote extends AppCompatActivity {
         b_one=findViewById(R.id.button6);
         b_two=findViewById(R.id.button7);
         b_three=findViewById(R.id.button9);
+        //p_one=findViewById(R.id.port1);
+        //p_two=findViewById(R.id.port2);
+        //p_three=findViewById(R.id.port3);
         p1 = findViewById(R.id.textView15);
         p2 = findViewById(R.id.textView16);
         p3 = findViewById(R.id.textView17);
@@ -76,9 +89,14 @@ public class Vote extends AppCompatActivity {
         b_one.setVisibility(View.INVISIBLE);
         b_two.setVisibility(View.INVISIBLE);
         b_three.setVisibility(View.INVISIBLE);
+        //p_one.setVisibility(View.INVISIBLE);
+        //p_two.setVisibility(View.INVISIBLE);
+        //p_three.setVisibility(View.INVISIBLE);
         p1.setVisibility(View.INVISIBLE);
         p2.setVisibility(View.INVISIBLE);
         p3.setVisibility(View.INVISIBLE);
+
+        // view1 = findViewById(R.id.port1);
 
         db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -87,24 +105,30 @@ public class Vote extends AppCompatActivity {
                         if (documentSnapshot.exists()) {
                         num=documentSnapshot.getLong("num");
                         System.out.println("NUM KI VAL=->>>>>>>>"+num);
-                            if (num == 0){
+                            if(num==0){
                                 System.out.println("1");
                             }
-                            else if (num == 1){
+                            else if(num==1){
                                 b_one.setVisibility(View.VISIBLE);
+                                //p_one.setVisibility(View.VISIBLE);
                                 p1.setVisibility(View.VISIBLE);
                             }
-                            else if (num == 2){
+                            else if(num==2){
                                 b_one.setVisibility(View.VISIBLE);
                                 b_two.setVisibility(View.VISIBLE);
+                                //p_one.setVisibility(View.VISIBLE);
+                                //p_two.setVisibility(View.VISIBLE);
                                 p1.setVisibility(View.VISIBLE);
                                 p2.setVisibility(View.VISIBLE);
 
                             }
-                            else {
+                            else{
                                 b_one.setVisibility(View.VISIBLE);
                                 b_two.setVisibility(View.VISIBLE);
                                 b_three.setVisibility(View.VISIBLE);
+                                //p_one.setVisibility(View.VISIBLE);
+                                //p_two.setVisibility(View.VISIBLE);
+                                //p_three.setVisibility(View.VISIBLE);
                                 p1.setVisibility(View.VISIBLE);
                                 p2.setVisibility(View.VISIBLE);
                                 p3.setVisibility(View.VISIBLE);
@@ -116,46 +140,71 @@ public class Vote extends AppCompatActivity {
                     }
                 });
         vote2();
-    }
 
+        //String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        //StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+//        storageReference.child("portfolio/").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                // Got the download URL for 'users/me/profile.png'
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                // Handle any errors
+//            }
+//        });
+//        final StorageReference filepath = storageReference.child("portfolio").child(uid + ".pdf");
+//        dbRef = FirebaseDatabase.getInstance().getReference().child("portfolio").child(uid + ".pdf");
+//        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                msg = snapshot.getValue(String.class);
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(Vote.this, "PDF Loading error!", Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//        view1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(Intent.ACTION_VIEW);
+//                intent.setDataAndType(Uri.parse(filepath.toString()), "application/pdf");
+//                startActivity(Intent.createChooser(intent, "Choose an Application:"));
+//            }
+//        });
+    }
 
     public void onClickBtn1(View view) {
         option = b_one.getText().toString();
         Glide.with(this).load(R.drawable.tygif).into(gif2);
         gif1.setVisibility(View.GONE);
-        internet=isConnected();
-        if(internet) {
-            vote(); }
-        else{
-            Toast.makeText(getApplicationContext(),"Check your internet connection",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(Vote.this,LostConnection.class));
+       internet=isConnected();
+       if(internet){
+        vote();}
+       else{
+           Toast.makeText(getApplicationContext(),"Check your internet connection",Toast.LENGTH_LONG).show();
+           startActivity(new Intent(Vote.this,LostConnection.class));
        }
+
     }
 
     public void onClickBtn2(View view) {
         option = b_two.getText().toString();
         Glide.with(this).load(R.drawable.tygif).into(gif2);
         gif1.setVisibility(View.GONE);
-        internet=isConnected();
-        if(internet) {
-            vote();
-        } else {
-            Toast.makeText(getApplicationContext(),"Check your internet connection",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(Vote.this,LostConnection.class));
-        }
+        vote();
+        //gif2.setVisibility(View.INVISIBLE);
     }
 
     public void onClickBtn3(View view) {
         option = b_three.getText().toString();
         Glide.with(this).load(R.drawable.tygif).into(gif2);
         gif1.setVisibility(View.GONE);
-        internet=isConnected();
-        if(internet) {
-            vote();
-        } else {
-            Toast.makeText(getApplicationContext(),"Check your internet connection",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(Vote.this,LostConnection.class));
-        }
+        vote();
+        //gif2.setVisibility(View.VISIBLE);
     }
 
     public void vote() {
@@ -178,6 +227,7 @@ public class Vote extends AppCompatActivity {
                             }
                         }
                         else {
+                           // vote();
                             Toast.makeText(Vote.this, "Please try again", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -185,6 +235,7 @@ public class Vote extends AppCompatActivity {
     }
 
     public void vote2() {
+        //storageReference = FirebaseStorage.getInstance().getReference();
         db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -208,24 +259,45 @@ public class Vote extends AppCompatActivity {
                         }
                     }
                 });
+
     }
 
     public void portfolio(String uID) {
+        System.out.println("==========================================================================" + uID);
         storageReference.child("portfolio/" + uID + ".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
+                // Got the download URL for 'users/me/profile.png'
+               // Toast.makeText(Vote.this, "Worked", Toast.LENGTH_SHORT).show();
                 String url=uri.toString();
                 downloadFile(Vote.this,"Mobile",".pdf",DIRECTORY_DOWNLOADS,url);
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
                 Toast.makeText(Vote.this, "Portfolio is not available", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
+//    public void portfolio(String uID) throws IOException {
+//        StorageReference storageRef = storageReference.child("portfolio/" + uID + ".pdf");
+//        File localFile = File.createTempFile("port", "pdf");
+//        storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                // Local temp file has been created
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception exception) {
+//                // Handle any errors
+//            }
+//        });
+//    }
 
     public void downloadFile(Context context,String fileName,String fileExtension,String destinationDirectory,String url){
         DownloadManager downloadManager= (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
@@ -247,17 +319,18 @@ public class Vote extends AppCompatActivity {
     public void view3(View view) throws IOException {
         portfolio(uid3);
     }
-
-
     boolean isConnected(){
+
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo != null) {
+
+        if(networkInfo!=null){
             if(networkInfo.isConnected())
                 return true;
             else
                 return false;
-        } else
+        }else
             return false;
+
     }
 }
