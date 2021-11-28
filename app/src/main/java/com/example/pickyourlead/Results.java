@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,11 @@ public class Results extends AppCompatActivity {
         chart= findViewById(R.id.piechart);
         result();
     }
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(Results.this,Options.class));
+    }
+
 
 
     public void result() {

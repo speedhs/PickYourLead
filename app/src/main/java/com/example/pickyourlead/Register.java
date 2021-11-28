@@ -46,6 +46,7 @@ public class Register extends AppCompatActivity {
 
 
     public void options_page(View view) throws InterruptedException {
+        spinner.setVisibility(View.VISIBLE);
         if (flag) {
             user.reload();
             TimeUnit.SECONDS.sleep(1);
@@ -59,9 +60,10 @@ public class Register extends AppCompatActivity {
         } else {
             boolean internet = isConnected();
             if (internet) {
-                spinner.setVisibility(View.VISIBLE);
                 re();
+
             } else {
+                spinner.setVisibility(View.INVISIBLE);
                 Toast.makeText(getApplicationContext(), "Internet check kar", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(Register.this, LostConnection.class));
             }
@@ -75,6 +77,7 @@ public class Register extends AppCompatActivity {
         pass=findViewById(R.id.editTextTextPassword2);
         String password=pass.getText().toString();
         email=mail.getText().toString();
+        spinner.setVisibility(View.INVISIBLE);
         if  (email.isEmpty()) {
             spinner.setVisibility(View.INVISIBLE);
             mail.setError("Email is empty");
