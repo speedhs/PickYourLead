@@ -58,6 +58,7 @@ public class Vote extends AppCompatActivity {
     long num;
     String option;
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    String pOption;
 
 
 
@@ -230,7 +231,7 @@ public class Vote extends AppCompatActivity {
             @Override
             public void onSuccess(Uri uri) {
                 String url=uri.toString();
-                downloadFile(Vote.this,"Mobile",".pdf",DIRECTORY_DOWNLOADS,url);
+                downloadFile(Vote.this,pOption,".pdf",DIRECTORY_DOWNLOADS,url);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -253,14 +254,17 @@ public class Vote extends AppCompatActivity {
 
     public void view1(View view) throws IOException {
         portfolio(uid1);
+        pOption=cad0;
     }
 
     public void view2(View view) throws IOException {
         portfolio(uid2);
+        pOption=cad1;
     }
 
     public void view3(View view) throws IOException {
         portfolio(uid3);
+        pOption=cad2;
     }
 
 

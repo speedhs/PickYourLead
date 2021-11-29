@@ -91,7 +91,7 @@ public class Login extends AppCompatActivity {
                         spinner.setVisibility(View.INVISIBLE);
                     }
                     else {
-                        Toast.makeText(Login.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Please check your Login credentials", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
