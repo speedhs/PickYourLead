@@ -219,7 +219,14 @@ public class Vote extends AppCompatActivity {
     }
 
     public void portfolio(String uID) {
-        storageReference.child("portfolio/" + uID + ".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        String root;
+        if(PollsList.item.equals("CLASS REPRESENTATIVE")){
+                root=PollsList.item;
+        }
+        else{
+            root="COUNCIL";
+        }
+        storageReference.child("portfolio/"+root+"/" + uID + ".pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 String url=uri.toString();

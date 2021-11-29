@@ -61,7 +61,7 @@ public class ContestElection extends AppCompatActivity {
     Uri imageuri = null;
     Button btnChoose;
     ProgressDialog dialog;
-    long counter;
+
 
 
     @Override
@@ -193,7 +193,7 @@ public class ContestElection extends AppCompatActivity {
 
     public void storecand(){
         Map<String, Object> user = new HashMap<>();
-        user.put(Long.toString(counter), sub.getText().toString());
+        user.put(Long.toString(PollsList.counter), sub.getText().toString());
         user.put(sub.getText().toString(),0);
         user.put(sub.getText().toString()+"uId",Options.uId);
 

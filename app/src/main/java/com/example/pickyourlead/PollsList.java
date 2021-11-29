@@ -28,7 +28,8 @@ public class PollsList extends AppCompatActivity {
     ImageView gif1;
     static String pollsOption;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    static String item;
+    static long counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class PollsList extends AppCompatActivity {
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
-                String item = mySpinner.getSelectedItem().toString();
+                 item = mySpinner.getSelectedItem().toString();
                 pollsOption = item;
                 if (!(item.equals("CLASS REPRESENTATIVE"))){
                     Register.branch=item;
@@ -87,7 +88,7 @@ public class PollsList extends AppCompatActivity {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                 if (documentSnapshot.exists()) {
-                                    long counter=documentSnapshot.getLong("num");
+                                     counter=documentSnapshot.getLong("num");
                                     if(counter==3){
                                         Toast.makeText(PollsList.this,"Limit exceeded",Toast.LENGTH_SHORT).show();
                                         return;
