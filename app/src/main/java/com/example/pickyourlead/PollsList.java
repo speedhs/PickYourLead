@@ -15,10 +15,19 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PollsList extends AppCompatActivity {
     ImageView gif1;
     static String pollsOption;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     @Override
@@ -61,7 +70,7 @@ public class PollsList extends AppCompatActivity {
         if (Home.nextpage.equals("Vote")) {
             boolean net= isConnected();
             if (net == false) {
-                Home.lastpage="PollsList";
+
                 Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
                 startActivity(new Intent(PollsList.this,LostConnection.class));
             }
@@ -71,19 +80,46 @@ public class PollsList extends AppCompatActivity {
         }
         else if (Home.nextpage.equals("Contest")) {
             boolean net= isConnected();
-            if (net == false) {
-                Home.lastpage="PollsList";
-                Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
-                startActivity(new Intent(PollsList.this,LostConnection.class));
+            if (net == true) {
+
+                db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if (documentSnapshot.exists()) {
+                                    long counter=documentSnapshot.getLong("num");
+                                    if(counter==3){
+                                        Toast.makeText(PollsList.this,"Limit exceeded",Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+
+                                    Intent intent = new Intent(PollsList.this, ContestElection.class);
+                                    startActivity(intent);
+
+
+
+                                }
+                                else {
+                                    Toast.makeText(getApplicationContext(), "PLEASE TRY AGAIN" , Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+
+
+
+
+
+
             }
             else {
-                Intent intent = new Intent(PollsList.this, ContestElection.class);
-                startActivity(intent);}
+                Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
+                startActivity(new Intent(PollsList.this,LostConnection.class));
+               }
         }
         else {
             boolean net= isConnected();
             if (net == false) {
-                Home.lastpage="PollsList";
+               // Home.lastpage="PollsList";
                 Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
                 startActivity(new Intent(PollsList.this,LostConnection.class));
             }

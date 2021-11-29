@@ -49,6 +49,7 @@ public class ContestElection extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 234;
     static String position;//CR OR COUNCIL
     StorageReference filepath;
+    int pdfFlag;
 
 //    private Button btnChoose;
 //    private Button btnUpload;
@@ -85,7 +86,7 @@ public class ContestElection extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-
+            pdfFlag=1;
             imageuri = data.getData();
             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             StorageReference storageReference = FirebaseStorage.getInstance().getReference();
@@ -108,35 +109,18 @@ public class ContestElection extends AppCompatActivity {
             // dialog.dismiss();
 
         }
+        else{
+            pdfFlag=0;
+        }
     }
 
 
     public void submit (View view) {
-        final ProgressDialog pd= new ProgressDialog(this);
-        pd.setTitle("Uploading ");
-        pd.show();
-        System.out.println("FILE NAME ->"+imageuri);
-        filepath.putFile(imageuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                pd.dismiss();
-                Toast.makeText(ContestElection.this, "Uploaded Successfully!", Toast.LENGTH_SHORT).show();
+        if(pdfFlag==0){
+            Toast.makeText(ContestElection.this, "Please attach your portfolio", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                pd.dismiss();
-                Toast.makeText(ContestElection.this, "Uploading Failed.Try Again", Toast.LENGTH_SHORT).show();
-            }
-        })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>(){
-                    @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot){
-                        double proPercent=(100.0*taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
-                        pd.setMessage("Progess: "+ (int)proPercent+"%");
-                    }
-                });
 
         db.collection("users").document(Options.uId).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -157,6 +141,33 @@ public class ContestElection extends AppCompatActivity {
 
                             System.out.println("FLAG STATUS ---->"+flagStatus);
                             if(flagStatus==0) {
+                                final ProgressDialog pd= new ProgressDialog(ContestElection.this);
+                                pd.setTitle("Uploading ");
+                                pd.show();
+                                System.out.println("FILE NAME ->"+imageuri);
+                                filepath.putFile(imageuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        pd.dismiss();
+                                        Toast.makeText(ContestElection.this, "Uploaded Successfully!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(ContestElection.this,Options.class));
+
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        pd.dismiss();
+                                        Toast.makeText(ContestElection.this, "Uploading Failed.Try Again", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>(){
+                                            @Override
+                                            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot){
+                                                double proPercent=(100.0*taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
+                                                pd.setMessage("Progess: "+ (int)proPercent+"%");
+                                            }
+                                        });
+
+
                                 if (position.equals("CLASS REPRESENTATIVE")) {
                                     db.collection("users").document(Options.uId).update(PollsList.pollsOption + "cand", FieldValue.increment(1));
                                     storecand();
@@ -168,7 +179,8 @@ public class ContestElection extends AppCompatActivity {
                             }
                             else {
                                 Toast.makeText(ContestElection.this, "Sorry you cannot contest for more than once for CR or COUNCIL position", Toast.LENGTH_LONG).show();
-                                Toast.makeText(ContestElection.this, "Sorry you cannot contest for more than once for CR or COUNCIL position", Toast.LENGTH_LONG).show();
+                               
+                                return;
                             }
                         }
                         else {
@@ -180,33 +192,14 @@ public class ContestElection extends AppCompatActivity {
 
 
     public void storecand(){
-        db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            long counter=documentSnapshot.getLong("num");
-                            if(counter==3){
-                                Toast.makeText(ContestElection.this,"Limit exceeded",Toast.LENGTH_LONG).show();
-                                return;
-                            }
+        Map<String, Object> user = new HashMap<>();
+        user.put(Long.toString(counter), sub.getText().toString());
+        user.put(sub.getText().toString(),0);
+        user.put(sub.getText().toString()+"uId",Options.uId);
 
-                            Map<String, Object> user = new HashMap<>();
-                            user.put(Long.toString(counter), sub.getText().toString());
-                            user.put(sub.getText().toString(),0);
-                            user.put(sub.getText().toString()+"uId",Options.uId);
+        db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).set(user, SetOptions.merge());
+        db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).update("num", FieldValue.increment(1));
 
-                            db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).set(user, SetOptions.merge());
-                            db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).update("num", FieldValue.increment(1));
-
-                            // startActivity(new Intent(ContestElection.this,Options.class));
-
-                        }
-                        else {
-                            System.out.println("Hello");
-                        }
-                    }
-                });
     }
 
     @Override
