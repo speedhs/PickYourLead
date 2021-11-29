@@ -44,13 +44,12 @@ public class Options extends AppCompatActivity {
                                 Toast.makeText(Options.this, "Sorry Voting Period is over", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            // vote();
                             Toast.makeText(Options.this, "Please try again", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
     }
+
 
     public void viewResults(View view) {
         Home.nextpage = "Results";
@@ -80,19 +79,19 @@ public class Options extends AppCompatActivity {
         startActivity(next);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_r, menu);
         return true;
-
     }
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.out) {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(Options.this, Home.class));
-
         }
         return true;
     }

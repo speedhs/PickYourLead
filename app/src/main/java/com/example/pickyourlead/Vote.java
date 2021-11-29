@@ -61,8 +61,6 @@ public class Vote extends AppCompatActivity {
     String pOption;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +126,8 @@ public class Vote extends AppCompatActivity {
     public void onBackPressed(){
         startActivity(new Intent(Vote.this,Options.class));
     }
+
+
     public void onClickBtn1(View view) {
         option = b_one.getText().toString();
         Glide.with(this).load(R.drawable.tygif).into(gif2);
@@ -140,6 +140,7 @@ public class Vote extends AppCompatActivity {
             startActivity(new Intent(Vote.this,LostConnection.class));
         }
     }
+
 
     public void onClickBtn2(View view) {
         option = b_two.getText().toString();
@@ -154,6 +155,7 @@ public class Vote extends AppCompatActivity {
         }
     }
 
+
     public void onClickBtn3(View view) {
         option = b_three.getText().toString();
         Glide.with(this).load(R.drawable.tygif).into(gif2);
@@ -166,6 +168,7 @@ public class Vote extends AppCompatActivity {
             startActivity(new Intent(Vote.this,LostConnection.class));
         }
     }
+
 
     public void vote() {
         db.collection("users").document(Options.uId).get()
@@ -193,6 +196,7 @@ public class Vote extends AppCompatActivity {
                 });
     }
 
+
     public void vote2() {
         db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -218,6 +222,7 @@ public class Vote extends AppCompatActivity {
                     }
                 });
     }
+
 
     public void portfolio(String uID) {
         String root;
@@ -257,10 +262,12 @@ public class Vote extends AppCompatActivity {
         pOption=cad0;
     }
 
+
     public void view2(View view) throws IOException {
         portfolio(uid2);
         pOption=cad1;
     }
+
 
     public void view3(View view) throws IOException {
         portfolio(uid3);
@@ -286,6 +293,7 @@ public class Vote extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_r, menu);
         return true;
     }
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

@@ -43,11 +43,12 @@ public class Results extends AppCompatActivity {
         chart= findViewById(R.id.piechart);
         result();
     }
+
+
     @Override
     public void onBackPressed(){
         startActivity(new Intent(Results.this,Options.class));
     }
-
 
 
     public void result() {
@@ -114,12 +115,15 @@ public class Results extends AppCompatActivity {
                     }
                 });
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_r, menu);
         return true;
 
     }
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
