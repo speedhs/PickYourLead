@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">PickYourLead</string>
-    <string name="enter_your_name">Enter your name :</string>
     <string-array name="branches">
         <item>Select your Branch</item>
         <item>CSE</item>

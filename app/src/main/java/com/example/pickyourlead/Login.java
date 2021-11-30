@@ -29,6 +29,13 @@ public class Login extends AppCompatActivity {
     private ProgressBar spinner;
 
 
+    public void forgot_pass(View view) {
+        Intent next = new Intent(this, ForgotPasword.class);
+        startActivity(next);
+        spinner.setVisibility(View.INVISIBLE);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,13 +100,6 @@ public class Login extends AppCompatActivity {
                 startActivity(new Intent(Login.this,LostConnection.class));
             }
         });
-    }
-
-
-    public void forgot_pass(View view) {
-        Intent next = new Intent(this, ForgotPasword.class);
-        startActivity(next);
-        spinner.setVisibility(View.INVISIBLE);
     }
 
 

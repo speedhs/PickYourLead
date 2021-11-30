@@ -45,11 +45,23 @@ import java.util.concurrent.TimeUnit;
 public class ContestElection extends AppCompatActivity {
     EditText sub;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    static String position; //CR OR COUNCIL
+
+    private static final int PICK_IMAGE_REQUEST = 234;
+    static String position;//CR OR COUNCIL
     StorageReference filepath;
     int pdfFlag;
+
+//    private Button btnChoose;
+//    private Button btnUpload;
+//    private ImageView imageView;
+
+    //private Uri filePath;
+
+
     Uri imageuri = null;
     Button btnChoose;
+    ProgressDialog dialog;
+
 
 
     @Override
@@ -64,6 +76,7 @@ public class ContestElection extends AppCompatActivity {
                 Intent galleryIntent = new Intent();
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
                 galleryIntent.setType("application/pdf");
+                //  startActivityForResult(Intent.createChooser(galleryIntent,"PDF file selected"), 12);
                 startActivityForResult(galleryIntent, 1);
             }
         });
@@ -78,13 +91,23 @@ public class ContestElection extends AppCompatActivity {
             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             StorageReference storageReference = FirebaseStorage.getInstance().getReference();
             Toast.makeText(ContestElection.this, "File Attached", Toast.LENGTH_SHORT).show();
+
+
             if(PollsList.pollsOption.equals("CLASS REPRESENTATIVE")){
+
                 position="CLASS REPRESENTATIVE";
             }
             else{
+
                 position="COUNCIL";
             }
+
+
+
             filepath = storageReference.child("portfolio").child(position).child(uid + ".pdf");
+            //Toast.makeText(ContestElection.this, filepath.getName(), Toast.LENGTH_SHORT).show();
+            // dialog.dismiss();
+
         }
         else{
             pdfFlag=0;
@@ -97,6 +120,8 @@ public class ContestElection extends AppCompatActivity {
             Toast.makeText(ContestElection.this, "Please attach your portfolio", Toast.LENGTH_SHORT).show();
             return;
         }
+
+
         db.collection("users").document(Options.uId).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -107,10 +132,14 @@ public class ContestElection extends AppCompatActivity {
                             long flagStatus;
                             if(PollsList.pollsOption.equals("CLASS REPRESENTATIVE")){
                                 flagStatus = documentSnapshot.getLong(PollsList.pollsOption+"cand");
+
                             }
                             else{
                                 flagStatus=documentSnapshot.getLong("COUNCILcand");
+
                             }
+
+                            System.out.println("FLAG STATUS ---->"+flagStatus);
                             if(flagStatus==0) {
                                 final ProgressDialog pd= new ProgressDialog(ContestElection.this);
                                 pd.setTitle("Uploading ");
@@ -137,6 +166,8 @@ public class ContestElection extends AppCompatActivity {
                                                 pd.setMessage("Progess: "+ (int)proPercent+"%");
                                             }
                                         });
+
+
                                 if (position.equals("CLASS REPRESENTATIVE")) {
                                     db.collection("users").document(Options.uId).update(PollsList.pollsOption + "cand", FieldValue.increment(1));
                                     storecand();
@@ -144,9 +175,11 @@ public class ContestElection extends AppCompatActivity {
                                     db.collection("users").document(Options.uId).update("COUNCILcand", FieldValue.increment(1));
                                     storecand();
                                 }
+
                             }
                             else {
                                 Toast.makeText(ContestElection.this, "Sorry you cannot contest for more than once for CR or COUNCIL position", Toast.LENGTH_LONG).show();
+                               
                                 return;
                             }
                         }
@@ -166,8 +199,8 @@ public class ContestElection extends AppCompatActivity {
 
         db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).set(user, SetOptions.merge());
         db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).update("num", FieldValue.increment(1));
-    }
 
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -175,13 +208,10 @@ public class ContestElection extends AppCompatActivity {
         return true;
 
     }
-
-
     @Override
     public void onBackPressed(){
         startActivity(new Intent(ContestElection.this,Options.class));
     }
-
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

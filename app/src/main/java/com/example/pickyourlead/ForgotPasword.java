@@ -18,14 +18,6 @@ public class ForgotPasword extends AppCompatActivity {
     private EditText email ;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_pasword);
-        email= findViewById(R.id.forgotpassword);
-    }
-
-
     public void reset_pass (View view) {
         String str_email = email.getText().toString();
         if  (str_email.isEmpty()) {
@@ -49,5 +41,14 @@ public class ForgotPasword extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_forgot_pasword);
+        email= findViewById(R.id.forgotpassword);
+
     }
 }

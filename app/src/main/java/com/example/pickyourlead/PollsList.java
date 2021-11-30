@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,7 +16,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,7 +30,6 @@ public class PollsList extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     static String item;
     static long counter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +48,7 @@ public class PollsList extends AppCompatActivity {
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
-                item = mySpinner.getSelectedItem().toString();
+                 item = mySpinner.getSelectedItem().toString();
                 pollsOption = item;
                 if (!(item.equals("CLASS REPRESENTATIVE"))){
                     Register.branch=item;
@@ -63,13 +59,13 @@ public class PollsList extends AppCompatActivity {
                     Register.batch=Register.originalBatch;
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 // TODO Auto-generated method stub
             }
         });
     }
-
 
     public void navigate(View view){
         if (Home.nextpage.equals("Vote")) {
@@ -86,6 +82,7 @@ public class PollsList extends AppCompatActivity {
         else if (Home.nextpage.equals("Contest")) {
             boolean net= isConnected();
             if (net == true) {
+
                 db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).get()
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
@@ -96,14 +93,24 @@ public class PollsList extends AppCompatActivity {
                                         Toast.makeText(PollsList.this,"Limit exceeded",Toast.LENGTH_SHORT).show();
                                         return;
                                     }
+
                                     Intent intent = new Intent(PollsList.this, ContestElection.class);
                                     startActivity(intent);
+
+
+
                                 }
                                 else {
                                     Toast.makeText(getApplicationContext(), "PLEASE TRY AGAIN" , Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
+
+
+
+
+
+
             }
             else {
                 Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
@@ -113,6 +120,7 @@ public class PollsList extends AppCompatActivity {
         else {
             boolean net= isConnected();
             if (net == false) {
+               // Home.lastpage="PollsList";
                 Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
                 startActivity(new Intent(PollsList.this,LostConnection.class));
             }
@@ -121,7 +129,6 @@ public class PollsList extends AppCompatActivity {
                 startActivity(intent);}
         }
     }
-
 
     boolean isConnected() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -133,22 +140,5 @@ public class PollsList extends AppCompatActivity {
                 return false;
         } else
             return false;
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_r, menu);
-        return true;
-    }
-
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.out) {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(PollsList.this, Home.class));
-        }
-        return true;
     }
 }

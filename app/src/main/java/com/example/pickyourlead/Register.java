@@ -45,53 +45,6 @@ public class Register extends AppCompatActivity {
     boolean flag=false;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        spinner = (ProgressBar)findViewById(R.id.progressBar);
-        spinner.setVisibility(View.GONE);
-
-        Spinner mySpinner = (Spinner) findViewById(R.id.spinner2);
-        Spinner mySpinner2 = (Spinner) findViewById(R.id.spinner5);
-
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Register.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.branches));
-        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mySpinner.setAdapter(myAdapter);
-
-        ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(Register.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.batch));
-        myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mySpinner2.setAdapter(myAdapter2);
-
-        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
-                branch = mySpinner.getSelectedItem().toString();
-                originalBranch=branch;
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-            }
-        });
-
-        mySpinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
-                batch = mySpinner2.getSelectedItem().toString();
-                originalBatch=batch;
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-            }
-        });
-    }
-
-
-
     public void options_page(View view) throws InterruptedException {
         spinner.setVisibility(View.VISIBLE);
         if (flag) {
@@ -204,6 +157,52 @@ public class Register extends AppCompatActivity {
         Intent next = new Intent(this, Options.class);
         startActivity(next);
         spinner.setVisibility(View.INVISIBLE);
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+        spinner = (ProgressBar)findViewById(R.id.progressBar);
+        spinner.setVisibility(View.GONE);
+
+        Spinner mySpinner = (Spinner) findViewById(R.id.spinner2);
+        Spinner mySpinner2 = (Spinner) findViewById(R.id.spinner5);
+
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Register.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.branches));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner.setAdapter(myAdapter);
+
+        ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(Register.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.batch));
+        myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner2.setAdapter(myAdapter2);
+
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
+                branch = mySpinner.getSelectedItem().toString();
+                originalBranch=branch;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        mySpinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?>arg0, View view, int arg2, long arg3) {
+                batch = mySpinner2.getSelectedItem().toString();
+                originalBatch=batch;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
     }
 
 
