@@ -91,7 +91,7 @@ public class Vote extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
                             num=documentSnapshot.getLong("num");
-                            System.out.println("NUM KI VAL=->>>>>>>>"+num);
+                           // System.out.println("NUM KI VAL=->>>>>>>>"+num);
                             if (num == 0){
                                 System.out.println("1");
                             }
@@ -116,7 +116,7 @@ public class Vote extends AppCompatActivity {
                             }
                         }
                         else {
-                            Toast.makeText(Vote.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Vote.this, "Please try again", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -136,7 +136,7 @@ public class Vote extends AppCompatActivity {
         if(internet) {
             vote(); }
         else{
-            Toast.makeText(getApplicationContext(),"Check your internet connection",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Please check your internet connection",Toast.LENGTH_LONG).show();
             startActivity(new Intent(Vote.this,LostConnection.class));
         }
     }
@@ -149,7 +149,7 @@ public class Vote extends AppCompatActivity {
         if(internet) {
             vote();
         } else {
-            Toast.makeText(getApplicationContext(),"Check your internet connection",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Please check your internet connection",Toast.LENGTH_LONG).show();
             startActivity(new Intent(Vote.this,LostConnection.class));
         }
     }
@@ -162,7 +162,7 @@ public class Vote extends AppCompatActivity {
         if(internet) {
             vote();
         } else {
-            Toast.makeText(getApplicationContext(),"Check your internet connection",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Please check your internet connection",Toast.LENGTH_LONG).show();
             startActivity(new Intent(Vote.this,LostConnection.class));
         }
     }
@@ -182,7 +182,7 @@ public class Vote extends AppCompatActivity {
                                 gif2.setVisibility(View.VISIBLE);
                             }
                             else{
-                                Toast.makeText(Vote.this, "Sorry,you have already voted", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Vote.this, "Sorry,but you have already voted", Toast.LENGTH_LONG).show();
                                 gif2.setVisibility(View.INVISIBLE);
                             }
                         }
@@ -213,7 +213,7 @@ public class Vote extends AppCompatActivity {
                             uid3 = documentSnapshot.getString(cad2+"uId");
 
                         } else {
-                            Toast.makeText(Vote.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Vote.this, "Please try again", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

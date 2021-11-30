@@ -64,7 +64,7 @@ public class Register extends AppCompatActivity {
 
             } else {
                 spinner.setVisibility(View.INVISIBLE);
-                Toast.makeText(getApplicationContext(), "Internet check kar", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Please check your Internet connection", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(Register.this, LostConnection.class));
             }
         }
@@ -123,11 +123,11 @@ public class Register extends AppCompatActivity {
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(Register.this, "Firse try kar", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Register.this, "Please try again", Toast.LENGTH_LONG).show();
                                 }
                             });
                         } else {
-                            Toast.makeText(Register.this, "Sorry, but you are already registered", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Register.this, "Sorry,but you are already registered", Toast.LENGTH_SHORT).show();
                             spinner.setVisibility(View.INVISIBLE);
                         }
                     }

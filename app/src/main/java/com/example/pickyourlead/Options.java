@@ -41,7 +41,7 @@ public class Options extends AppCompatActivity {
                                 Intent next = new Intent(Options.this, PollsList.class);
                                 startActivity(next);
                             } else {
-                                Toast.makeText(Options.this, "Sorry Voting Period is over", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Options.this, "Voting Period is not live", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             // vote();
@@ -64,7 +64,7 @@ public class Options extends AppCompatActivity {
                                 Intent next = new Intent(Options.this, PollsList.class);
                                 startActivity(next);
                             } else {
-                                Toast.makeText(Options.this, "Sorry voting period is not over", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Options.this, "Results are not out", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(Options.this, "Please try again", Toast.LENGTH_SHORT).show();
@@ -76,8 +76,23 @@ public class Options extends AppCompatActivity {
 
     public void contestElection(View view) {
         Home.nextpage = "Contest";
-        Intent next = new Intent(Options.this, PollsList.class);
-        startActivity(next);
+        db.collection("flag").document("flag").get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            flag = documentSnapshot.getBoolean("CONTEST");
+                            if (flag) {
+                                Intent next = new Intent(Options.this, PollsList.class);
+                                startActivity(next);
+                            } else {
+                                Toast.makeText(Options.this, "Contesting period is not live", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(Options.this, "Please try again", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     @Override

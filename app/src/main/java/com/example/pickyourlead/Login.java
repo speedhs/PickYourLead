@@ -96,7 +96,7 @@ public class Login extends AppCompatActivity {
                 });
             }
             else{
-                Toast.makeText(getApplicationContext(), "Check Internet conn", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Please check your internet connection", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(Login.this,LostConnection.class));
             }
         });

@@ -72,7 +72,7 @@ public class PollsList extends AppCompatActivity {
             boolean net= isConnected();
             if (net == false) {
 
-                Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Please check your internet connection" , Toast.LENGTH_LONG).show();
                 startActivity(new Intent(PollsList.this,LostConnection.class));
             }
             else {
@@ -90,7 +90,7 @@ public class PollsList extends AppCompatActivity {
                                 if (documentSnapshot.exists()) {
                                      counter=documentSnapshot.getLong("num");
                                     if(counter==3){
-                                        Toast.makeText(PollsList.this,"Limit exceeded",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(PollsList.this,"Sorry, already 3 candidates have applied for the position ",Toast.LENGTH_LONG).show();
                                         return;
                                     }
 
@@ -101,7 +101,7 @@ public class PollsList extends AppCompatActivity {
 
                                 }
                                 else {
-                                    Toast.makeText(getApplicationContext(), "PLEASE TRY AGAIN" , Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Please try again" , Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -113,7 +113,7 @@ public class PollsList extends AppCompatActivity {
 
             }
             else {
-                Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Please check your internet connection" , Toast.LENGTH_LONG).show();
                 startActivity(new Intent(PollsList.this,LostConnection.class));
                }
         }
@@ -121,7 +121,7 @@ public class PollsList extends AppCompatActivity {
             boolean net= isConnected();
             if (net == false) {
                // Home.lastpage="PollsList";
-                Toast.makeText(getApplicationContext(), "INTERNET CHECK KAR" , Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Please check your internet connection" , Toast.LENGTH_LONG).show();
                 startActivity(new Intent(PollsList.this,LostConnection.class));
             }
             else {

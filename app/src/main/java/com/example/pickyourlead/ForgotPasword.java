@@ -34,7 +34,7 @@ public class ForgotPasword extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(ForgotPasword.this, "Check your mail", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPasword.this, "Please check your mail", Toast.LENGTH_LONG).show();
                 }
                 else {
                     Toast.makeText(ForgotPasword.this, "Sorry, this email is not registered", Toast.LENGTH_LONG).show();

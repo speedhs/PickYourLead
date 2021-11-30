@@ -31,7 +31,7 @@ public class LostConnection extends AppCompatActivity {
         if (internet) {
             finish();
         } else {
-            Toast.makeText(getApplicationContext(),"Firse check kar",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Please check your internet connection",Toast.LENGTH_LONG).show();
         }
     }
 
