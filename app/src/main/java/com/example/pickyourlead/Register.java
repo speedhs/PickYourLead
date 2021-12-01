@@ -57,7 +57,8 @@ public class Register extends AppCompatActivity {
                 spinner.setVisibility(View.INVISIBLE);
                 Toast.makeText(this, "Please verify your email", Toast.LENGTH_SHORT).show();
             }
-        } else {
+        }
+        else {
             boolean internet = isConnected();
             if (internet) {
                 re();
@@ -189,6 +190,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 // TODO Auto-generated method stub
+                Toast.makeText(Register.this, "Please select your branch", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -201,6 +203,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 // TODO Auto-generated method stub
+                Toast.makeText(Register.this, "Please select your batch", Toast.LENGTH_SHORT).show();
             }
         });
     }

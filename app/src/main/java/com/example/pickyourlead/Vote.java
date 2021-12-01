@@ -174,7 +174,6 @@ public class Vote extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
                             flagStatus=documentSnapshot.getLong(PollsList.pollsOption+"flag");
-                            System.out.println("FLAG STATUS ---->"+flagStatus);
                             if(flagStatus==0){
                                 db.collection("trial").document(Register.branch).collection(Register.batch).document(Register.batch).update(option, FieldValue.increment(1));
                                 db.collection("users").document(Options.uId).update(PollsList.pollsOption+"flag", FieldValue.increment(1));
@@ -190,6 +189,7 @@ public class Vote extends AppCompatActivity {
                             Toast.makeText(Vote.this, "Please try again", Toast.LENGTH_SHORT).show();
                         }
                     }
+
                 });
     }
 

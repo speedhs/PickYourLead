@@ -82,6 +82,7 @@ public class PollsList extends AppCompatActivity {
                 Intent intent = new Intent(PollsList.this, Vote.class);
                 startActivity(intent);}
         }
+
         else if (Home.nextpage.equals("Contest")) {
             boolean net= isConnected();
             if (net == true) {
@@ -120,6 +121,7 @@ public class PollsList extends AppCompatActivity {
                 startActivity(new Intent(PollsList.this,LostConnection.class));
                }
         }
+
         else {
             boolean net= isConnected();
             if (net == false) {
